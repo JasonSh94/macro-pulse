@@ -157,26 +157,26 @@ const MACRO_FACTORS = [
 ];
 
 const FACTOR_STOCKS = {
-  value:        { stat: "P/E",          stocks: [{ t: "BRK.B", n: "Berkshire Hathaway", v: "11.2×" }, { t: "JPM",  n: "JPMorgan Chase",    v: "12.4×" }, { t: "XOM",  n: "ExxonMobil",       v: "13.1×" }, { t: "CVX",  n: "Chevron",            v: "12.8×" }, { t: "BAC",  n: "Bank of America",    v: "10.9×" }] },
-  momentum:     { stat: "12M Return",   stocks: [{ t: "NVDA", n: "Nvidia",              v: "+156%" }, { t: "META", n: "Meta Platforms",     v: "+68%"  }, { t: "AVGO", n: "Broadcom",          v: "+72%"  }, { t: "LLY",  n: "Eli Lilly",          v: "+44%"  }, { t: "GE",   n: "GE Aerospace",       v: "+58%"  }] },
-  quality:      { stat: "ROE",          stocks: [{ t: "MSFT", n: "Microsoft",           v: "38%"   }, { t: "AAPL", n: "Apple",              v: "147%"  }, { t: "V",    n: "Visa",              v: "44%"   }, { t: "MA",   n: "Mastercard",         v: "155%"  }, { t: "JNJ",  n: "Johnson & Johnson",  v: "22%"   }] },
-  growth_f:     { stat: "EPS Growth",   stocks: [{ t: "NVDA", n: "Nvidia",              v: "+103%" }, { t: "AMZN", n: "Amazon",             v: "+84%"  }, { t: "META", n: "Meta Platforms",    v: "+71%"  }, { t: "GOOGL",n: "Alphabet",            v: "+32%"  }, { t: "CRM",  n: "Salesforce",         v: "+28%"  }] },
-  smallcap:     { stat: "Mkt Cap",      stocks: [{ t: "AXON", n: "Axon Enterprise",     v: "$28B"  }, { t: "DOCS", n: "Doximity",           v: "$4.1B" }, { t: "CAVA", n: "Cava Group",         v: "$8.6B" }, { t: "FTAI", n: "FTAI Aviation",       v: "$9.2B" }, { t: "KTOS", n: "Kratos Defense",      v: "$3.8B" }] },
-  minvol:       { stat: "Beta",         stocks: [{ t: "JNJ",  n: "Johnson & Johnson",   v: "0.52"  }, { t: "PG",   n: "Procter & Gamble",   v: "0.58"  }, { t: "KO",   n: "Coca-Cola",         v: "0.55"  }, { t: "WMT",  n: "Walmart",            v: "0.48"  }, { t: "VZ",   n: "Verizon",            v: "0.41"  }] },
-  carry:        { stat: "Yield",        stocks: [{ t: "MO",   n: "Altria Group",        v: "8.4%"  }, { t: "T",    n: "AT&T",               v: "6.7%"  }, { t: "O",    n: "Realty Income",     v: "5.8%"  }, { t: "MPC",  n: "Marathon Petroleum", v: "2.1%+bb"}, { t: "KMI",  n: "Kinder Morgan",      v: "6.2%"  }] },
-  income:       { stat: "Div Yield",    stocks: [{ t: "VZ",   n: "Verizon",             v: "6.7%"  }, { t: "T",    n: "AT&T",               v: "6.7%"  }, { t: "MO",   n: "Altria Group",      v: "8.4%"  }, { t: "IBM",  n: "IBM",                v: "3.3%"  }, { t: "PM",   n: "Philip Morris",      v: "5.4%"  }] },
-  profitability:{ stat: "Gross Margin", stocks: [{ t: "MSFT", n: "Microsoft",           v: "69%"   }, { t: "GOOGL",n: "Alphabet",            v: "57%"   }, { t: "V",    n: "Visa",              v: "81%"   }, { t: "AAPL", n: "Apple",              v: "44%"   }, { t: "MA",   n: "Mastercard",         v: "79%"   }] },
-  earn_rev:     { stat: "Rev Trend",    stocks: [{ t: "JPM",  n: "JPMorgan Chase",      v: "↑↑↑"  }, { t: "GS",   n: "Goldman Sachs",      v: "↑↑↑"  }, { t: "XOM",  n: "ExxonMobil",       v: "↑↑"   }, { t: "CAT",  n: "Caterpillar",        v: "↑↑"   }, { t: "RTX",  n: "RTX Corp",           v: "↑↑↑"  }] },
-  shyield:      { stat: "Total Yield",  stocks: [{ t: "AAPL", n: "Apple",               v: "4.1%"  }, { t: "META", n: "Meta Platforms",     v: "3.8%"  }, { t: "GOOGL",n: "Alphabet",            v: "2.9%"  }, { t: "MPC",  n: "Marathon Petroleum", v: "8.2%"  }, { t: "PSX",  n: "Phillips 66",        v: "7.1%"  }] },
-  liquidity_f:  { stat: "Avg Daily Vol",stocks: [{ t: "BOOT", n: "Boot Barn",           v: "$42M"  }, { t: "CAVA", n: "Cava Group",         v: "$55M"  }, { t: "UFPI", n: "UFP Industries",     v: "$38M"  }, { t: "LNTH", n: "Lantheus Holdings",   v: "$91M"  }, { t: "IIPR", n: "Innovative Ind Props", v: "$28M" }] },
-  growth_m:     { stat: "Exposure",     stocks: [{ t: "XLY",  n: "Cons. Discret. ETF",  v: "Cyclical"   }, { t: "XLI",  n: "Industrials ETF",    v: "Cyclical"   }, { t: "XLK",  n: "Technology ETF",    v: "Growth"     }, { t: "IWM",  n: "Russell 2000 ETF",    v: "Risk-on"    }, { t: "EEM",  n: "EM Equities ETF",     v: "Global growth" }] },
-  inflation_m:  { stat: "Inflation β",  stocks: [{ t: "GLD",  n: "Gold ETF",            v: "High"       }, { t: "TIP",  n: "TIPS ETF",          v: "Direct"     }, { t: "XLE",  n: "Energy ETF",        v: "High"       }, { t: "PDBC", n: "Commodities ETF",     v: "High"       }, { t: "VNQ",  n: "Real Estate ETF",     v: "Medium"        }] },
-  fin_cond:     { stat: "FCI Sensitiv.",stocks: [{ t: "XLF",  n: "Financials ETF",      v: "High"       }, { t: "KRE",  n: "Regional Banks ETF",v: "Very high"  }, { t: "HYG",  n: "High Yield ETF",    v: "High"       }, { t: "XLRE", n: "Real Estate ETF",     v: "Medium"     }, { t: "XLU",  n: "Utilities ETF",       v: "Medium"        }] },
-  liquidity_m:  { stat: "Liquidity β",  stocks: [{ t: "BTC",  n: "Bitcoin (proxy)",     v: "Very high"  }, { t: "IWM",  n: "Russell 2000 ETF",  v: "High"       }, { t: "ARKK", n: "ARK Innovation ETF", v: "Very high"  }, { t: "EEM",  n: "EM Equities ETF",     v: "High"       }, { t: "HYG",  n: "High Yield ETF",      v: "Medium"        }] },
-  vol_regime:   { stat: "Vol Exposure", stocks: [{ t: "VIXY", n: "Short-Term VIX ETF",  v: "Long vol"   }, { t: "PUTW", n: "Put Write ETF",      v: "Short vol"  }, { t: "TAIL", n: "Cambria Tail Risk",  v: "Long tail"  }, { t: "SPLV", n: "S&P Low Vol ETF",     v: "Low beta"   }, { t: "UVXY", n: "Ultra VIX ETF",       v: "Lev. long vol" }] },
-  risk_app:     { stat: "Risk Score",   stocks: [{ t: "SPY",  n: "S&P 500 ETF",         v: "Benchmark"  }, { t: "EEM",  n: "EM Equities ETF",    v: "High risk"  }, { t: "HYG",  n: "High Yield ETF",    v: "Credit risk"}, { t: "IWM",  n: "Russell 2000 ETF",    v: "High beta"  }, { t: "GLD",  n: "Gold ETF",            v: "Risk-off"      }] },
-  dollar:       { stat: "USD Sensitiv.",stocks: [{ t: "EEM",  n: "EM Equities ETF",     v: "–ve"        }, { t: "GLD",  n: "Gold ETF",           v: "–ve"        }, { t: "XLE",  n: "Energy ETF",        v: "–ve"        }, { t: "AAPL", n: "Apple (intl rev)",    v: "–ve"        }, { t: "UUP",  n: "USD Bull ETF",        v: "Direct long"   }] },
-  duration:     { stat: "Duration",     stocks: [{ t: "TLT",  n: "20+ Yr Treasury ETF", v: "17.5 yrs"   }, { t: "EDV",  n: "Extended Duration",  v: "24.5 yrs"   }, { t: "ZROZ", n: "Zero Coupon ETF",    v: "26.8 yrs"   }, { t: "TIP",  n: "TIPS ETF",           v: "7.4 yrs"    }, { t: "IEF",  n: "7-10 Yr Tsy ETF",    v: "7.7 yrs"       }] },
+  value:        { stat: "P/E",          stocks: [{ t: "BRK.B", n: "Berkshire Hathaway", v: "11.2×" }, { t: "JPM",  n: "JPMorgan Chase",   v: "12.4×" }, { t: "XOM",  n: "ExxonMobil",       v: "13.1×" }], etfs: [{ t: "VTV",  n: "Vanguard Value ETF",       v: "P/E 16×"   }, { t: "VLUE", n: "iShares MSCI USA Value",   v: "Deep val." }, { t: "IWD",  n: "iShares R1000 Value",      v: "Lg blend"  }] },
+  momentum:     { stat: "12M Return",   stocks: [{ t: "NVDA", n: "Nvidia",              v: "+156%" }, { t: "META", n: "Meta Platforms",    v: "+68%"  }, { t: "AVGO", n: "Broadcom",          v: "+72%"  }], etfs: [{ t: "MTUM", n: "iShares MSCI Momentum",    v: "Factor"    }, { t: "PDP",  n: "Invesco DWA Momentum",    v: "Price mom."}, { t: "QMOM", n: "Alpha Arch. QMom",        v: "Quant"     }] },
+  quality:      { stat: "ROE",          stocks: [{ t: "MSFT", n: "Microsoft",           v: "38%"   }, { t: "V",    n: "Visa",              v: "44%"   }, { t: "MA",   n: "Mastercard",         v: "155%"  }], etfs: [{ t: "QUAL", n: "iShares MSCI USA Quality", v: "ROE/IG"    }, { t: "SPHQ", n: "Invesco S&P 500 Quality",  v: "Quality"   }, { t: "DGRW", n: "WisdomTree Quality Gr.",   v: "Earnings"  }] },
+  growth_f:     { stat: "EPS Growth",   stocks: [{ t: "NVDA", n: "Nvidia",              v: "+103%"}, { t: "AMZN", n: "Amazon",             v: "+84%"  }, { t: "META", n: "Meta Platforms",    v: "+71%"  }], etfs: [{ t: "VUG",  n: "Vanguard Growth ETF",      v: "Lg growth" }, { t: "QQQ",  n: "Invesco Nasdaq 100",      v: "Tech/gr."  }, { t: "IWF",  n: "iShares R1000 Growth",     v: "Lg cap"    }] },
+  smallcap:     { stat: "Mkt Cap",      stocks: [{ t: "AXON", n: "Axon Enterprise",     v: "$28B"  }, { t: "CAVA", n: "Cava Group",         v: "$8.6B" }, { t: "KTOS", n: "Kratos Defense",      v: "$3.8B" }], etfs: [{ t: "IWM",  n: "iShares Russell 2000",     v: "Broad SC"  }, { t: "VB",   n: "Vanguard Small-Cap ETF",   v: "Blend"     }, { t: "IJR",  n: "iShares Core S&P SC",      v: "Core SC"   }] },
+  minvol:       { stat: "Beta",         stocks: [{ t: "JNJ",  n: "Johnson & Johnson",   v: "0.52"  }, { t: "PG",   n: "Procter & Gamble",  v: "0.58"  }, { t: "WMT",  n: "Walmart",            v: "0.48"  }], etfs: [{ t: "USMV", n: "iShares Min Vol USA",      v: "0.75β avg" }, { t: "SPLV", n: "Invesco S&P 500 Low Vol",  v: "Low vol"   }, { t: "EFAV", n: "iShares Min Vol Developed", v: "Global"    }] },
+  carry:        { stat: "Yield",        stocks: [{ t: "MO",   n: "Altria Group",        v: "8.4%"  }, { t: "T",    n: "AT&T",              v: "6.7%"  }, { t: "KMI",  n: "Kinder Morgan",      v: "6.2%"  }], etfs: [{ t: "JEPI", n: "JPMorgan Equity Premium",  v: "7.2% yld"  }, { t: "XYLD", n: "Global X S&P 500 CC",     v: "9.1%"      }, { t: "QYLD", n: "Global X Nasdaq CC",       v: "11.4%"     }] },
+  income:       { stat: "Div Yield",    stocks: [{ t: "VZ",   n: "Verizon",             v: "6.7%"  }, { t: "MO",   n: "Altria Group",      v: "8.4%"  }, { t: "PM",   n: "Philip Morris",      v: "5.4%"  }], etfs: [{ t: "SCHD", n: "Schwab US Dividend Eq.",   v: "3.5%"      }, { t: "VIG",  n: "Vanguard Div. Appreciatn", v: "1.9%"      }, { t: "VYM",  n: "Vanguard High Div. Yield",  v: "3.1%"      }] },
+  profitability:{ stat: "Gross Margin", stocks: [{ t: "MSFT", n: "Microsoft",           v: "69%"   }, { t: "V",    n: "Visa",              v: "81%"   }, { t: "MA",   n: "Mastercard",         v: "79%"   }], etfs: [{ t: "DGRW", n: "WisdomTree Quality Gr.",   v: "Earns."    }, { t: "FNDX", n: "Schwab Fundamental US",    v: "RAFI"      }, { t: "SPHQ", n: "Invesco S&P 500 Quality",  v: "GP/Assets" }] },
+  earn_rev:     { stat: "Rev Trend",    stocks: [{ t: "JPM",  n: "JPMorgan Chase",      v: "↑↑↑"  }, { t: "GS",   n: "Goldman Sachs",     v: "↑↑↑"  }, { t: "RTX",  n: "RTX Corp",           v: "↑↑↑"  }], etfs: [{ t: "REVS", n: "Columbia Research Enh.",   v: "Rev ++"    }, { t: "RWL",  n: "Invesco S&P Rev. Wtd.",   v: "Rev wtd"   }, { t: "PDP",  n: "Invesco DWA Momentum",    v: "Rev mom."  }] },
+  shyield:      { stat: "Total Yield",  stocks: [{ t: "AAPL", n: "Apple",               v: "4.1%"  }, { t: "MPC",  n: "Marathon Petroleum", v: "8.2%"  }, { t: "PSX",  n: "Phillips 66",        v: "7.1%"  }], etfs: [{ t: "PKW",  n: "Invesco Buyback Achievers",v: "Buybacks"  }, { t: "SYLD", n: "Cambria Shareholder Yld",  v: "BB+Div"    }, { t: "TTAC", n: "TrimTabs All Cap FCF",     v: "FCF"       }] },
+  liquidity_f:  { stat: "Avg Daily Vol",stocks: [{ t: "BOOT", n: "Boot Barn",           v: "$42M"  }, { t: "LNTH", n: "Lantheus Holdings",  v: "$91M"  }, { t: "IIPR", n: "Innovative Ind Props", v: "$28M"  }], etfs: [{ t: "IWO",  n: "iShares R2000 Growth",    v: "SC growth" }, { t: "VIOV", n: "Vanguard S&P SC 600 Val.", v: "SC value"  }, { t: "XSMO", n: "Invesco S&P SC Momentum",  v: "SC mom."   }] },
+  growth_m:     { stat: "Exposure",     stocks: [{ t: "CAT",  n: "Caterpillar",         v: "Cyclical"   }, { t: "DE",   n: "Deere & Co.",        v: "Cyclical"   }, { t: "FCX",  n: "Freeport-McMoRan",   v: "Risk-on"    }], etfs: [{ t: "XLY",  n: "SPDR Cons. Discret.",     v: "Cyclical"  }, { t: "XLI",  n: "SPDR Industrials",         v: "Cyclical"  }, { t: "IWM",  n: "iShares Russell 2000",     v: "Risk-on"   }] },
+  inflation_m:  { stat: "Inflation β",  stocks: [{ t: "XOM",  n: "ExxonMobil",          v: "Energy"     }, { t: "NEM",  n: "Newmont Corp.",      v: "Gold miner" }, { t: "FCX",  n: "Freeport-McMoRan",   v: "Copper"     }], etfs: [{ t: "GLD",  n: "SPDR Gold Trust",         v: "Gold"      }, { t: "TIP",  n: "iShares TIPS Bond ETF",   v: "Direct"    }, { t: "PDBC", n: "Invesco Commodity ETF",    v: "Broad comm."}] },
+  fin_cond:     { stat: "FCI Sensitiv.",stocks: [{ t: "GS",   n: "Goldman Sachs",       v: "High"       }, { t: "JPM",  n: "JPMorgan Chase",    v: "High"       }, { t: "MS",   n: "Morgan Stanley",    v: "High"       }], etfs: [{ t: "HYG",  n: "iShares iBoxx HY Corp.",  v: "Credit"    }, { t: "KRE",  n: "SPDR Regional Banking",   v: "Banks"     }, { t: "XLRE", n: "SPDR Real Estate",         v: "Rate sens."}] },
+  liquidity_m:  { stat: "Liquidity β",  stocks: [{ t: "MSTR", n: "MicroStrategy",       v: "BTC proxy"  }, { t: "COIN", n: "Coinbase",           v: "Very high"  }, { t: "HOOD", n: "Robinhood",           v: "High"       }], etfs: [{ t: "ARKK", n: "ARK Innovation ETF",     v: "Very high" }, { t: "EEM",  n: "iShares MSCI EM ETF",     v: "High"      }, { t: "IWM",  n: "iShares Russell 2000",     v: "High"      }] },
+  vol_regime:   { stat: "Vol Exposure", stocks: [{ t: "CBOE", n: "Cboe Global Markets",  v: "Vol benefic"}, { t: "IBKR", n: "Interactive Brokers", v: "Vol benefic"}, { t: "MSCI", n: "MSCI Inc.",            v: "Stable"     }], etfs: [{ t: "VIXY", n: "ProShares Short-Term VIX", v: "Long vol"  }, { t: "TAIL", n: "Cambria Tail Risk ETF",   v: "Tail hedge" }, { t: "SPLV", n: "Invesco S&P 500 Low Vol",  v: "Low beta"  }] },
+  risk_app:     { stat: "Risk Score",   stocks: [{ t: "MSFT", n: "Microsoft",           v: "Risk-on"    }, { t: "TSLA", n: "Tesla",               v: "High beta"  }, { t: "NVDA", n: "Nvidia",              v: "Growth"     }], etfs: [{ t: "SPY",  n: "SPDR S&P 500 ETF",        v: "Benchmark" }, { t: "EEM",  n: "iShares MSCI EM ETF",     v: "Risk-on"   }, { t: "GLD",  n: "SPDR Gold Trust",          v: "Risk-off"  }] },
+  dollar:       { stat: "USD Sensitiv.",stocks: [{ t: "AAPL", n: "Apple (intl rev)",    v: "–ve USD"    }, { t: "NEM",  n: "Newmont Corp.",      v: "–ve USD"    }, { t: "BABA", n: "Alibaba (EM)",        v: "–ve USD"    }], etfs: [{ t: "UUP",  n: "Invesco DB USD Index",    v: "Long USD"  }, { t: "EEM",  n: "iShares MSCI EM ETF",     v: "–ve USD β" }, { t: "GLD",  n: "SPDR Gold Trust",          v: "–ve USD β" }] },
+  duration:     { stat: "Duration",     stocks: [{ t: "BRK.B",n: "Berkshire Hathaway",  v: "Float ben." }, { t: "ALLY", n: "Ally Financial",     v: "Rate sens." }, { t: "BX",   n: "Blackstone",         v: "Credit exp."}], etfs: [{ t: "TLT",  n: "iShares 20+ Yr Tsy ETF",  v: "17.5 yrs"  }, { t: "EDV",  n: "Vanguard Extended Dur.",   v: "24.5 yrs"  }, { t: "ZROZ", n: "PIMCO Zero Coupon ETF",    v: "26.8 yrs"  }] },
 };
 
 // ── DEMO CHART DATA ────────────────────────────────────────────────────────────
@@ -351,20 +351,43 @@ function FactorModal({ factor, quadrant, onClose }) {
         </div>
         <div style={{ fontSize: 21, lineHeight: 1.7, color: C.muted, fontFamily: SANS, marginBottom: 18, paddingBottom: 18, borderBottom: `1px solid ${C.border}` }}>{factor.tip}</div>
         {data && <>
-          <div style={{ fontSize: 16, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted, marginBottom: 10 }}>REPRESENTATIVE NAMES · {data.stat.toUpperCase()}</div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            {data.stocks.map((s, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "9px 12px", background: C.card, borderRadius: 8, border: `1px solid ${C.border}` }}>
-                <div style={{ width: 22, height: 22, borderRadius: 5, background: col + "20", border: `1px solid ${col}35`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontFamily: BOLD, fontWeight: 700, color: col, flexShrink: 0 }}>{i + 1}</div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 20, fontFamily: BOLD, fontWeight: 700, color: C.text }}>{s.t}</div>
-                  <div style={{ fontSize: 18, color: C.muted, fontFamily: SANS, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.n}</div>
-                </div>
-                <div style={{ fontSize: 20, fontFamily: BOLD, fontWeight: 700, color: col, flexShrink: 0 }}>{s.v}</div>
+          <div style={{ display: "flex", gap: 14, marginBottom: 10 }}>
+            {/* Stocks column */}
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 14, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.13em", color: C.muted, marginBottom: 8 }}>STOCKS · {data.stat.toUpperCase()}</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                {data.stocks.map((s, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "9px 12px", background: C.card, borderRadius: 8, border: `1px solid ${C.border}` }}>
+                    <div style={{ width: 22, height: 22, borderRadius: 5, background: col + "20", border: `1px solid ${col}35`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontFamily: BOLD, fontWeight: 700, color: col, flexShrink: 0 }}>{i + 1}</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 19, fontFamily: BOLD, fontWeight: 700, color: C.text }}>{s.t}</div>
+                      <div style={{ fontSize: 16, color: C.muted, fontFamily: SANS, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.n}</div>
+                    </div>
+                    <div style={{ fontSize: 17, fontFamily: BOLD, fontWeight: 700, color: col, flexShrink: 0 }}>{s.v}</div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            {/* ETFs / Funds column */}
+            {data.etfs && (
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 14, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.13em", color: C.muted, marginBottom: 8 }}>ETFs / FUNDS</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  {data.etfs.map((s, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "9px 12px", background: C.card, borderRadius: 8, border: `1px solid ${C.border}` }}>
+                      <div style={{ width: 22, height: 22, borderRadius: 5, background: C.dim + "25", border: `1px solid ${C.dim}40`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontFamily: BOLD, fontWeight: 700, color: C.muted, flexShrink: 0 }}>{i + 1}</div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: 19, fontFamily: BOLD, fontWeight: 700, color: C.text }}>{s.t}</div>
+                        <div style={{ fontSize: 16, color: C.muted, fontFamily: SANS, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.n}</div>
+                      </div>
+                      <div style={{ fontSize: 17, fontFamily: BOLD, fontWeight: 700, color: C.muted, flexShrink: 0 }}>{s.v}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-          <div style={{ marginTop: 12, fontSize: 16, fontFamily: SANS, color: C.dim, textAlign: "center" }}>Illustrative only · Demo data · Not a recommendation</div>
+          <div style={{ fontSize: 15, fontFamily: SANS, color: C.dim, textAlign: "center" }}>Illustrative only · Demo data · Not a recommendation</div>
         </>}
         <button onClick={onClose} style={{ marginTop: 16, width: "100%", padding: "12px", background: "none", border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 18, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted, cursor: "pointer" }}>CLOSE</button>
       </div>
@@ -373,7 +396,7 @@ function FactorModal({ factor, quadrant, onClose }) {
 }
 
 // ── CYCLE QUADRANT ─────────────────────────────────────────────────────────────
-function CycleQuadrant({ cycle }) {
+function CycleQuadrant({ cycle, live }) {
   const [altsOpen, setAltsOpen] = useState(false);
   const altsRef = useRef();
   useEffect(() => {
@@ -391,6 +414,13 @@ function CycleQuadrant({ cycle }) {
     { label: ["STAGFLATION"],         x: 50,  y: 15, color: C.red,    q: "stagflation" },
     { label: ["DEFLATIONARY","BUST"], x: 50,  y: 58, color: C.purple, q: "bust" },
   ];
+  // Historical trail: use live data if available, otherwise demo fallbacks
+  const hist1 = live?.cycle_1y_ago  || { growth:  0.45, inflation:  0.10 };
+  const hist2 = live?.cycle_2y_ago  || { growth:  0.10, inflation:  0.65 };
+  const h1x = 100 + hist1.growth * 66;
+  const h1y = 37.5 - hist1.inflation * 25.5;
+  const h2x = 100 + hist2.growth * 66;
+  const h2y = 37.5 - hist2.inflation * 25.5;
   return (
     <Card>
       <div style={{ display: "flex", gap: 48, alignItems: "center" }}>
@@ -411,6 +441,18 @@ function CycleQuadrant({ cycle }) {
                 fill={cycle.quadrant === q.q ? q.color : C.dim} fontFamily={BOLD}
                 fontWeight={cycle.quadrant === q.q ? "800" : "700"}>{line}</text>
             )))}
+            {/* Trend trail: dashed line from 2Y → 1Y → now */}
+            <polyline points={`${h2x},${h2y} ${h1x},${h1y} ${dotX},${dotY}`}
+              fill="none" stroke={C.dim} strokeWidth="0.9" strokeDasharray="2,1.5" strokeOpacity="0.65" />
+            {/* 2Y historical dot */}
+            <circle cx={h2x} cy={h2y} r="2.8" fill={C.dim} fillOpacity="0.25" />
+            <circle cx={h2x} cy={h2y} r="1.6" fill={C.dim} fillOpacity="0.55" />
+            <text x={h2x + 3} y={h2y + 1.2} fontSize="3" fill={C.dim} fontFamily={BOLD} fontWeight="700">2Y</text>
+            {/* 1Y historical dot */}
+            <circle cx={h1x} cy={h1y} r="3.2" fill={C.dim} fillOpacity="0.25" />
+            <circle cx={h1x} cy={h1y} r="2"   fill={C.dim} fillOpacity="0.60" />
+            <text x={h1x + 3} y={h1y + 1.2} fontSize="3" fill={C.dim} fontFamily={BOLD} fontWeight="700">1Y</text>
+            {/* Current dot */}
             <circle cx={dotX} cy={dotY} r="6"   fill={Q.color + "20"} />
             <circle cx={dotX} cy={dotY} r="3.5" fill={Q.color + "55"} />
             <circle cx={dotX} cy={dotY} r="2"   fill={Q.color} />
@@ -678,7 +720,7 @@ function FundamentalsTab({ live }) {
 function RegimeTab({ cycle, live, onSelectFactor }) {
   return <>
     <SecLabel>CYCLE POSITIONING</SecLabel>
-    <CycleQuadrant cycle={cycle} />
+    <CycleQuadrant cycle={cycle} live={live} />
     <SecLabel>FACTOR REGIME SCORECARD</SecLabel>
     <FactorCard quadrant={cycle.quadrant} onSelectFactor={onSelectFactor} />
     <SecLabel>MACRO FUNDAMENTALS</SecLabel>

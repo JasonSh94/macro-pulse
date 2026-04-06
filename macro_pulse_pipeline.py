@@ -75,6 +75,108 @@ def fred_prev(series_id):
     return data[-2] if len(data) >= 2 else None
 
 
+def fred_as_of(series_id, as_of_date, units=None):
+    """Return the most recent observation for a series up to as_of_date."""
+    dt = datetime.strptime(as_of_date, "%Y-%m-%d")
+    start = (dt - timedelta(days=180)).strftime("%Y-%m-%d")
+    params = {
+        "series_id": series_id,
+        "api_key": FRED_KEY,
+        "file_type": "json",
+        "observation_start": start,
+        "observation_end": as_of_date,
+        "sort_order": "desc",
+        "limit": 5,
+    }
+    if units:
+        params["units"] = units
+    try:
+        r = requests.get(FRED_URL, params=params)
+        r.raise_for_status()
+        obs = r.json().get("observations", [])
+        valid = [o for o in obs if o["value"] != "."]
+        return {"date": valid[0]["date"], "value": float(valid[0]["value"])} if valid else None
+    except Exception as e:
+        print(f"⚠️  fred_as_of({series_id}, {as_of_date}): {e}")
+        return None
+
+
+def compute_historical_cycles():
+    """
+    Compute cycle positions as of ~1yr ago and ~2yr ago for the trend trail.
+    Returns dict: { cycle_1y_ago: {growth, inflation, quadrant}, cycle_2y_ago: ... }
+    """
+    today = datetime.today()
+    periods = {
+        "cycle_1y_ago": (today - timedelta(days=365)).strftime("%Y-%m-%d"),
+        "cycle_2y_ago": (today - timedelta(days=730)).strftime("%Y-%m-%d"),
+    }
+    result = {}
+    for key, as_of in periods.items():
+        print(f"  📅 Historical cycle as of {as_of}...")
+        m = {}
+        try:
+            # Yield curve spread (10Y – 2Y)
+            y2  = fred_as_of("DGS2",  as_of)
+            y10 = fred_as_of("DGS10", as_of)
+            if y2 and y10:
+                m["yield_curve_spread"] = round(y10["value"] - y2["value"], 3)
+
+            # Manufacturing (Philly Fed, 0-centred)
+            ism = fred_as_of("GACDFSA066MSFRBPHI", as_of)
+            if ism:
+                m["ism_manufacturing"] = ism["value"]
+
+            # Initial jobless claims
+            claims = fred_as_of("ICSA", as_of)
+            if claims:
+                m["initial_claims_latest"] = claims["value"]
+
+            # Unemployment
+            ue = fred_as_of("UNRATE", as_of)
+            if ue:
+                m["unemployment_latest"] = ue["value"]
+
+            # HY spread
+            hy = fred_as_of("BAMLH0A0HYM2", as_of)
+            if hy:
+                m["hy_spread_latest"] = hy["value"]
+
+            # Core PCE YoY (pc1 = percent change from year ago)
+            pce = fred_as_of("PCEPILFE", as_of, units="pc1")
+            if pce:
+                m["core_pce_latest"] = pce["value"]
+
+            # 10Y Breakeven
+            be = fred_as_of("T10YIE", as_of)
+            if be:
+                m["breakeven_10y_latest"] = be["value"]
+
+            # 10Y Real yield
+            ry = fred_as_of("DFII10", as_of)
+            if ry:
+                m["real_yield_10y_latest"] = ry["value"]
+
+            # Copper/Gold ratio via yfinance
+            dt = datetime.strptime(as_of, "%Y-%m-%d")
+            yf_start = (dt - timedelta(days=7)).strftime("%Y-%m-%d")
+            yf_end   = (dt + timedelta(days=1)).strftime("%Y-%m-%d")
+            copper_h = yf.Ticker("HG=F").history(start=yf_start, end=yf_end)
+            gold_h   = yf.Ticker("GC=F").history(start=yf_start, end=yf_end)
+            if not copper_h.empty and not gold_h.empty:
+                m["copper_gold_ratio"] = round(
+                    float(copper_h["Close"].iloc[-1]) / float(gold_h["Close"].iloc[-1]), 4
+                )
+        except Exception as e:
+            print(f"  ⚠️  Historical metrics error ({as_of}): {e}")
+
+        cyc = compute_cycle(m)
+        result[key] = {"growth": cyc["growth"], "inflation": cyc["inflation"], "quadrant": cyc["quadrant"]}
+        print(f"    → {cyc['quadrant']}  g={cyc['growth']}  i={cyc['inflation']}")
+
+    return result
+
+
 # ── YAHOO FINANCE HELPERS ──────────────────────────────────────────────────────
 
 def yf_latest(ticker, field="Close"):
@@ -630,6 +732,12 @@ def build_data():
     # ── CYCLE SCORING ─────────────────────────────────────────────────────────
     print("🔄 Computing cycle position...")
     data["cycle"] = compute_cycle(data)
+
+    # ── HISTORICAL CYCLE TRAIL (1yr ago, 2yr ago) ──────────────────────────
+    print("📈 Computing historical cycle positions for trend trail...")
+    hist = compute_historical_cycles()
+    data["cycle_1y_ago"] = hist.get("cycle_1y_ago")
+    data["cycle_2y_ago"] = hist.get("cycle_2y_ago")
 
     # ── METADATA ──────────────────────────────────────────────────────────────
     data["last_updated"] = datetime.utcnow().isoformat() + "Z"
