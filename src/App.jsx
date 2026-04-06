@@ -181,16 +181,16 @@ const FACTOR_STOCKS = {
 
 // ── DEMO CHART DATA ────────────────────────────────────────────────────────────
 const GDP_DATA = [
-  { q:"Q1'22",consumption:1.8,investment:0.9,govt:0.2,netExports:-3.2,inventories:5.3 },
-  { q:"Q2'22",consumption:0.7,investment:-0.3,govt:-0.5,netExports:1.4,inventories:-2.0 },
-  { q:"Q3'22",consumption:1.4,investment:-0.6,govt:0.3,netExports:2.8,inventories:-1.4 },
-  { q:"Q4'22",consumption:1.5,investment:-0.3,govt:0.6,netExports:0.5,inventories:1.5 },
-  { q:"Q1'23",consumption:2.5,investment:0.5,govt:0.4,netExports:-0.1,inventories:-2.1 },
-  { q:"Q2'23",consumption:1.7,investment:0.8,govt:0.5,netExports:0.6,inventories:-0.3 },
-  { q:"Q3'23",consumption:2.4,investment:0.9,govt:0.8,netExports:0.1,inventories:1.5 },
-  { q:"Q4'23",consumption:1.9,investment:0.5,govt:0.6,netExports:0.4,inventories:0.2 },
-  { q:"Q1'24",consumption:1.4,investment:0.3,govt:0.5,netExports:-0.5,inventories:0.4 },
-  { q:"Q2'24",consumption:1.8,investment:0.4,govt:0.9,netExports:-0.6,inventories:0.3 },
+  { q:"Q1'22",consumption:1.8,investment:0.9,govt:0.2,netExports:-3.2 },
+  { q:"Q2'22",consumption:0.7,investment:-0.3,govt:-0.5,netExports:1.4 },
+  { q:"Q3'22",consumption:1.4,investment:-0.6,govt:0.3,netExports:2.8 },
+  { q:"Q4'22",consumption:1.5,investment:-0.3,govt:0.6,netExports:0.5 },
+  { q:"Q1'23",consumption:2.5,investment:0.5,govt:0.4,netExports:-0.1 },
+  { q:"Q2'23",consumption:1.7,investment:0.8,govt:0.5,netExports:0.6 },
+  { q:"Q3'23",consumption:2.4,investment:0.9,govt:0.8,netExports:0.1 },
+  { q:"Q4'23",consumption:1.9,investment:0.5,govt:0.6,netExports:0.4 },
+  { q:"Q1'24",consumption:1.4,investment:0.3,govt:0.5,netExports:-0.5 },
+  { q:"Q2'24",consumption:1.8,investment:0.4,govt:0.9,netExports:-0.6 },
 ];
 const YIELD_DATA = [
   { m:"Jan'23",y2:4.42,y10:3.88,real10:1.54,hy:4.52 },
@@ -391,7 +391,7 @@ function CycleQuadrant({ cycle }) {
   return (
     <Card>
       <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-        <div style={{ flex: "0 0 160px" }}>
+        <div style={{ flex: "0 0 260px" }}>
           <svg viewBox="0 0 100 100" width="100%" style={{ display: "block" }}>
             <rect x="0" y="0" width="50" height="50" fill={C.red    + "0f"} />
             <rect x="50" y="0" width="50" height="50" fill={C.amber  + "0a"} />
@@ -417,12 +417,12 @@ function CycleQuadrant({ cycle }) {
           <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted, marginBottom: 4 }}>CURRENT REGIME</div>
           <div style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 21, color: Q.color, lineHeight: 1.1, marginBottom: 2, letterSpacing: "-0.01em" }}>{Q.label}</div>
           <div style={{ fontSize: 10, fontFamily: SANS, color: C.muted, marginBottom: 12 }}>{Q.sub}</div>
-          <div style={{ marginBottom: 12 }}>
+          <div style={{ marginBottom: 12, maxWidth: 260 }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
               <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted }}>SIGNAL CONFIDENCE</span>
               <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: Q.color }}>{cycle.confidence}%</span>
             </div>
-            <div style={{ height: 3, background: C.border, borderRadius: 2, maxWidth: 220 }}>
+            <div style={{ height: 3, background: C.border, borderRadius: 2 }}>
               <div style={{ height: "100%", width: `${cycle.confidence}%`, background: Q.color, borderRadius: 2 }} />
             </div>
           </div>
@@ -434,7 +434,7 @@ function CycleQuadrant({ cycle }) {
               <span style={{ fontSize: 9, color: C.dim }}>ⓘ</span>
             </div>
             {altsOpen && (
-              <div style={{ position: "absolute", bottom: "calc(100% + 8px)", left: 0, width: 280, background: "#181b2e", border: `1px solid ${C.borderBright}`, borderRadius: 10, padding: "13px 14px", zIndex: 500, boxShadow: "0 12px 40px rgba(0,0,0,0.8)", pointerEvents: "none" }}>
+              <div style={{ position: "absolute", bottom: "calc(100% + 8px)", left: 0, width: 280, background: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 10, padding: "13px 14px", zIndex: 500, boxShadow: "0 12px 40px rgba(0,0,0,0.8)", pointerEvents: "none" }}>
                 <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.12em", color: Q.color, marginBottom: 6 }}>ALTS → {Q.alts.toUpperCase()}</div>
                 <div style={{ fontSize: 12, lineHeight: 1.65, color: C.muted, fontFamily: SANS, marginBottom: 12 }}>{Q.altsDesc}</div>
                 <div style={{ paddingTop: 10, borderTop: `1px solid ${C.border}` }}>
@@ -627,7 +627,7 @@ function FundamentalsTab({ live }) {
     </div>
     <SecLabel>GDP BY COMPONENT (QoQ, pp)</SecLabel>
     <Card style={{ marginBottom: 4 }}>
-      <BoxLegend items={[["Consumption",C.blue],["Investment",C.purple],["Govt",C.amber],["Net Exports",C.green],["Inventories",C.muted]]} />
+      <BoxLegend items={[["Consumption",C.blue],["Investment",C.purple],["Govt",C.amber],["Net Exports",C.green]]} />
       <ResponsiveContainer width="100%" height={170}>
         <BarChart data={GDP_DATA} barCategoryGap="20%" margin={{ top: 4, right: 4, bottom: 0, left: -22 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
@@ -638,8 +638,7 @@ function FundamentalsTab({ live }) {
           <Bar dataKey="consumption" stackId="a" fill={C.blue} />
           <Bar dataKey="investment"  stackId="a" fill={C.purple} />
           <Bar dataKey="govt"        stackId="a" fill={C.amber} />
-          <Bar dataKey="netExports"  stackId="a" fill={C.green} />
-          <Bar dataKey="inventories" stackId="a" fill={C.muted} radius={[3,3,0,0]} />
+          <Bar dataKey="netExports"  stackId="a" fill={C.green} radius={[3,3,0,0]} />
         </BarChart>
       </ResponsiveContainer>
     </Card>
@@ -708,7 +707,7 @@ export default function App() {
 
       {/* HEADER */}
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, zIndex: 100 }}>
-        <div style={{ maxWidth: 860, margin: "0 auto", padding: "12px 16px 0" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "12px 16px 0" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
           <span style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 20, letterSpacing: "-0.02em" }}>Macro Pulse</span>
           <div style={{ textAlign: "right" }}>
@@ -743,14 +742,14 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "6px 12px 24px" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "6px 12px 24px" }}>
         {tab === "regime"     && <RegimeTab cycle={cycle} live={live} onSelectFactor={setSelectedFactor} />}
         {tab === "sentiment"  && <SentimentTab live={live} />}
         {tab === "valuations" && <ValuationsTab live={live} />}
       </div>
 
       <div style={{ borderTop: `1px solid ${C.border}`, padding: "12px 16px", textAlign: "center" }}>
-        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ fontSize: 9, fontFamily: SANS, color: C.dim, lineHeight: 2 }}>
             For illustrative purposes only · Not financial advice<br />
             Sources: FRED · BLS · BEA · Yahoo Finance · CNN · AAII · CBOE
