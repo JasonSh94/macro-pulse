@@ -124,10 +124,10 @@ function computeCycleFromDemo() {
 
 // ── QUADRANT METADATA ──────────────────────────────────────────────────────────
 const QUADRANTS = {
-  goldilocks:  { label: "Goldilocks",       sub: "Growth ↑  Inflation ↓", color: C.green,  alts: "Amplify",  altsDesc: "In Goldilocks, both legs of a traditional portfolio are working. Alternatives should amplify returns — think leveraged equity strategies, private equity, and event-driven funds that thrive in benign, low-vol environments. This is the regime to take more risk, not less." },
-  boom:        { label: "Inflationary Boom",sub: "Growth ↑  Inflation ↑", color: C.amber,  alts: "Modify",   altsDesc: "In an inflationary boom, growth is still positive but inflation is eroding purchasing power. Alternatives should modify portfolio inflation exposure — think commodities, real assets, infrastructure, and macro funds long energy and materials." },
-  stagflation: { label: "Stagflation",      sub: "Growth ↓  Inflation ↑", color: C.red,    alts: "Hedge",    altsDesc: "Stagflation is the most hostile regime for traditional 60/40 — bonds can't protect you because inflation keeps yields elevated, while equities suffer from slowing growth. The Hedge bucket means alternatives should protect capital: managed futures, global macro long/short, and long volatility strategies." },
-  bust:        { label: "Deflationary Bust",sub: "Growth ↓  Inflation ↓", color: C.purple, alts: "Diversify",altsDesc: "In a deflationary bust, correlations across risk assets spike. Alternatives should provide genuine diversification — strategies with returns uncorrelated to markets, like equity market neutral, systematic multi-strat, and event-driven funds." },
+  goldilocks:  { label: "Goldilocks",       sub: "Growth ↑  Inflation ↓", color: C.green,  alts: "Amplify",  altsDesc: "In Goldilocks, both legs of a traditional portfolio are working. Alternatives should amplify returns — think leveraged equity strategies, private equity, and event-driven funds that thrive in benign, low-vol environments. This is the regime to take more risk, not less.", summary: "Goldilocks is the most benign environment for traditional portfolios — growth is running above trend while inflation remains contained, leaving central banks in a comfortable holding pattern. Equity multiples expand, credit spreads compress, and volatility stays subdued. Risk assets broadly outperform; carry strategies and equity longs compound most reliably in this regime. The key risk is late-cycle overheating that tips the environment into an inflationary boom." },
+  boom:        { label: "Inflationary Boom",sub: "Growth ↑  Inflation ↑", color: C.amber,  alts: "Modify",   altsDesc: "In an inflationary boom, growth is still positive but inflation is eroding purchasing power. Alternatives should modify portfolio inflation exposure — think commodities, real assets, infrastructure, and macro funds long energy and materials.", summary: "An inflationary boom features robust growth alongside rising price pressures, forcing central banks to tighten and compressing real returns on financial assets. Equities can continue to grind higher but face multiple compression as rates climb. Commodity-linked assets, energy, real assets, and inflation-protected securities outperform nominal bonds significantly. Duration is the primary risk to manage; watch for the cycle to roll into stagflation if growth begins to crack under tighter financial conditions." },
+  stagflation: { label: "Stagflation",      sub: "Growth ↓  Inflation ↑", color: C.red,    alts: "Hedge",    altsDesc: "Stagflation is the most hostile regime for traditional 60/40 — bonds can't protect you because inflation keeps yields elevated, while equities suffer from slowing growth. The Hedge bucket means alternatives should protect capital: managed futures, global macro long/short, and long volatility strategies.", summary: "Stagflation is the most hostile macro regime for multi-asset portfolios. Growth is decelerating while inflation stays elevated, squeezing equity earnings from the top line and keeping bond yields too high to provide ballast. Central banks face an impossible trade-off between containing inflation and supporting growth — policy mistakes are common. Capital preservation, inflation hedges, and genuinely uncorrelated return streams are the priority. History shows this regime tends to be shorter-lived than markets fear, but the drawdowns can be severe before the turn." },
+  bust:        { label: "Deflationary Bust",sub: "Growth ↓  Inflation ↓", color: C.purple, alts: "Diversify",altsDesc: "In a deflationary bust, correlations across risk assets spike. Alternatives should provide genuine diversification — strategies with returns uncorrelated to markets, like equity market neutral, systematic multi-strat, and event-driven funds.", summary: "A deflationary bust is characterised by collapsing growth and falling inflation expectations, typically driven by a credit deleveraging event or severe demand shock. Duration performs well as rates fall, but virtually all risk assets decline together — cross-asset correlations spike toward 1 as forced selling dominates. Liquidity premium, quality bias, and strategies with returns genuinely uncorrelated to market direction become paramount. Central bank and fiscal intervention often marks the cycle turn, creating sharp but short-lived rallies within the broader drawdown." },
 };
 
 // ── FACTOR DATA ────────────────────────────────────────────────────────────────
@@ -381,30 +381,30 @@ function CycleQuadrant({ cycle }) {
   }, []);
   const Q = QUADRANTS[cycle.quadrant];
   const dotX = 100 + cycle.growth * 66;
-  const dotY = 50 - cycle.inflation * 34;
+  const dotY = 37.5 - cycle.inflation * 25.5;
   const ql = [
-    { label: ["GOLDILOCKS"],          x: 150, y: 80, color: C.green,  q: "goldilocks" },
-    { label: ["INFLATIONARY","BOOM"], x: 150, y: 20, color: C.amber,  q: "boom" },
-    { label: ["STAGFLATION"],         x: 50,  y: 20, color: C.red,    q: "stagflation" },
-    { label: ["DEFLATIONARY","BUST"], x: 50,  y: 78, color: C.purple, q: "bust" },
+    { label: ["GOLDILOCKS"],          x: 150, y: 60, color: C.green,  q: "goldilocks" },
+    { label: ["INFLATIONARY","BOOM"], x: 150, y: 15, color: C.amber,  q: "boom" },
+    { label: ["STAGFLATION"],         x: 50,  y: 15, color: C.red,    q: "stagflation" },
+    { label: ["DEFLATIONARY","BUST"], x: 50,  y: 58, color: C.purple, q: "bust" },
   ];
   return (
     <Card>
       <div style={{ display: "flex", gap: 48, alignItems: "center" }}>
         <div style={{ flex: "0 0 1040px" }}>
-          <svg viewBox="0 0 200 100" width="100%" style={{ display: "block" }}>
-            <rect x="0" y="0" width="100" height="50" fill={C.red    + "0f"} />
-            <rect x="100" y="0" width="100" height="50" fill={C.amber  + "0a"} />
-            <rect x="0" y="50" width="100" height="50" fill={C.purple + "0a"} />
-            <rect x="100" y="50" width="100" height="50" fill={C.green  + "0a"} />
-            <line x1="100" y1="4" x2="100" y2="96" stroke={C.dim} strokeWidth="0.5" />
-            <line x1="4" y1="50" x2="196" y2="50" stroke={C.dim} strokeWidth="0.5" />
-            <text x="100" y="2.8" textAnchor="middle" fontSize="3.8" fill={C.muted} fontFamily={BOLD} fontWeight="700">INFLATION ↑</text>
-            <text x="100" y="99"  textAnchor="middle" fontSize="3.8" fill={C.muted} fontFamily={BOLD} fontWeight="700">INFLATION ↓</text>
-            <text x="2"   y="51.5" fontSize="3.2" fill={C.muted} fontFamily={BOLD} fontWeight="700">↓ GROWTH</text>
-            <text x="166" y="51.5" fontSize="3.2" fill={C.muted} fontFamily={BOLD} fontWeight="700">GROWTH ↑</text>
+          <svg viewBox="0 0 200 75" width="100%" style={{ display: "block" }}>
+            <rect x="0" y="0" width="100" height="37.5" fill={C.red    + "0f"} />
+            <rect x="100" y="0" width="100" height="37.5" fill={C.amber  + "0a"} />
+            <rect x="0" y="37.5" width="100" height="37.5" fill={C.purple + "0a"} />
+            <rect x="100" y="37.5" width="100" height="37.5" fill={C.green  + "0a"} />
+            <line x1="100" y1="3" x2="100" y2="72" stroke={C.dim} strokeWidth="0.5" />
+            <line x1="4" y1="37.5" x2="196" y2="37.5" stroke={C.dim} strokeWidth="0.5" />
+            <text x="100" y="2.1" textAnchor="middle" fontSize="3.8" fill={C.muted} fontFamily={BOLD} fontWeight="700">INFLATION ↑</text>
+            <text x="100" y="73"  textAnchor="middle" fontSize="3.8" fill={C.muted} fontFamily={BOLD} fontWeight="700">INFLATION ↓</text>
+            <text x="2"   y="38.5" fontSize="3.2" fill={C.muted} fontFamily={BOLD} fontWeight="700">↓ GROWTH</text>
+            <text x="166" y="38.5" fontSize="3.2" fill={C.muted} fontFamily={BOLD} fontWeight="700">GROWTH ↑</text>
             {ql.map(q => q.label.map((line, i) => (
-              <text key={`${q.q}-${i}`} x={q.x} y={q.y + i * 5.5 - (q.label.length - 1) * 2.5} textAnchor="middle" fontSize="3.8"
+              <text key={`${q.q}-${i}`} x={q.x} y={q.y + i * 4 - (q.label.length - 1) * 2} textAnchor="middle" fontSize="3.8"
                 fill={cycle.quadrant === q.q ? q.color : C.dim} fontFamily={BOLD}
                 fontWeight={cycle.quadrant === q.q ? "800" : "700"}>{line}</text>
             )))}
@@ -449,6 +449,7 @@ function CycleQuadrant({ cycle }) {
               </div>
             )}
           </div>
+          <div style={{ marginTop: 16, fontSize: 16, lineHeight: 1.7, color: C.muted, fontFamily: SANS, borderTop: `1px solid ${C.border}`, paddingTop: 12 }}>{Q.summary}</div>
         </div>
       </div>
     </Card>
@@ -475,7 +476,7 @@ function FactorCard({ quadrant, onSelectFactor }) {
           const sig = fsig(f, quadrant); const col = sigCol(sig);
           return (
             <div key={f.id} onClick={() => onSelectFactor(f)}
-              style={{ background: sigBg(sig), border: `1px solid ${col}22`, borderRadius: 7, padding: "8px 6px", cursor: "pointer", textAlign: "center", transition: "border-color 0.15s, transform 0.1s", userSelect: "none" }}
+              style={{ background: sigBg(sig), border: `1px solid ${col}22`, borderRadius: 7, padding: "12px 6px", cursor: "pointer", textAlign: "center", transition: "border-color 0.15s, transform 0.1s", userSelect: "none" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = col+"55"; e.currentTarget.style.transform = "scale(1.04)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = col+"22"; e.currentTarget.style.transform = "scale(1)"; }}>
               <div style={{ width: 5, height: 5, borderRadius: "50%", background: col, margin: "0 auto 5px" }} />
@@ -562,7 +563,7 @@ function ValuationsTab({ live }) {
     </div>
     <SecLabel>YIELD STACK & CREDIT</SecLabel>
     <Card style={{ marginBottom: 4 }}>
-      <ResponsiveContainer width="100%" height={175}>
+      <ResponsiveContainer width="100%" height={350}>
         <LineChart data={yieldChart} margin={{ top: 4, right: 4, bottom: 0, left: -22 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
           <XAxis dataKey="m" tick={AXIS_TICK} axisLine={false} tickLine={false} />
@@ -624,23 +625,33 @@ function FundamentalsTab({ live }) {
     <Card style={{ marginBottom: 4 }}>
       <BoxLegend items={[["Consumption",C.blue],["Investment",C.purple],["Govt",C.amber],["Net Exports",C.green]]} />
       <ResponsiveContainer width="100%" height={170}>
-        <BarChart data={GDP_DATA} barCategoryGap="20%" margin={{ top: 4, right: 4, bottom: 0, left: -22 }}>
+        <BarChart data={GDP_DATA.map(d=>({...d,
+          cons_p:Math.max(0,d.consumption),cons_n:Math.min(0,d.consumption),
+          inv_p:Math.max(0,d.investment),inv_n:Math.min(0,d.investment),
+          govt_p:Math.max(0,d.govt),govt_n:Math.min(0,d.govt),
+          nex_p:Math.max(0,d.netExports),nex_n:Math.min(0,d.netExports)
+        }))} barCategoryGap="20%" margin={{ top: 4, right: 4, bottom: 0, left: -22 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
           <XAxis dataKey="q" tick={AXIS_TICK} axisLine={false} tickLine={false} />
           <YAxis tick={AXIS_TICK} axisLine={false} tickLine={false} />
-          <ReTooltip contentStyle={TT_STYLE} cursor={{ fill: "#ffffff06" }} />
+          <ReTooltip contentStyle={TT_STYLE} cursor={{ fill: "#ffffff06" }}
+            formatter={(v,n)=>{const label={cons_p:"Consumption",cons_n:"Consumption",inv_p:"Investment",inv_n:"Investment",govt_p:"Govt",govt_n:"Govt",nex_p:"Net Exports",nex_n:"Net Exports"}[n]||n;return[v===0?null:v.toFixed(2),label];}} />
           <ReferenceLine y={0} stroke={C.dim} />
-          <Bar dataKey="consumption" stackId="a" fill={C.blue} />
-          <Bar dataKey="investment"  stackId="a" fill={C.purple} />
-          <Bar dataKey="govt"        stackId="a" fill={C.amber} />
-          <Bar dataKey="netExports"  stackId="a" fill={C.green} radius={[3,3,0,0]} />
+          <Bar dataKey="cons_p" stackId="pos" fill={C.blue}   name="Consumption" />
+          <Bar dataKey="inv_p"  stackId="pos" fill={C.purple} name="Investment" />
+          <Bar dataKey="govt_p" stackId="pos" fill={C.amber}  name="Govt" />
+          <Bar dataKey="nex_p"  stackId="pos" fill={C.green}  name="Net Exports" radius={[3,3,0,0]} />
+          <Bar dataKey="cons_n" stackId="neg" fill={C.blue}   name="Consumption" />
+          <Bar dataKey="inv_n"  stackId="neg" fill={C.purple} name="Investment" />
+          <Bar dataKey="govt_n" stackId="neg" fill={C.amber}  name="Govt" />
+          <Bar dataKey="nex_n"  stackId="neg" fill={C.green}  name="Net Exports" radius={[0,0,3,3]} />
         </BarChart>
       </ResponsiveContainer>
     </Card>
     <SecLabel>CPI BY COMPONENT (monthly pp)</SecLabel>
     <Card>
       <BoxLegend items={[["Shelter",C.red],["Supercore",C.amber],["Food",C.blue],["Energy",C.green],["Goods",C.muted]]} />
-      <ResponsiveContainer width="100%" height={170}>
+      <ResponsiveContainer width="100%" height={340}>
         <AreaChart data={CPI_DATA} margin={{ top: 4, right: 4, bottom: 0, left: -22 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={C.border} vertical={false} />
           <XAxis dataKey="m" tick={AXIS_TICK} axisLine={false} tickLine={false} />
