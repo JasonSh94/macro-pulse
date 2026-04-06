@@ -164,14 +164,38 @@ def scrape_aaii_sentiment():
 
 def scrape_put_call_ratio():
     """
-    Fetch CBOE equity put/call ratio from CDN CSV.
-    Returns latest ratio (float) or None.
+    Fetch equity put/call ratio.
+    Primary: yfinance SPY options (sum across 3 nearest expirations).
+    Fallback: CBOE CDN CSV (often stale/blocked but kept as secondary attempt).
+    Returns ratio (float) or None.
     """
+    # Primary: SPY options via yfinance
+    try:
+        import yfinance as yf
+        spy = yf.Ticker("SPY")
+        exps = spy.options
+        if exps:
+            total_puts, total_calls = 0, 0
+            for exp in exps[:3]:  # nearest 3 expirations for representative volume
+                try:
+                    chain = spy.option_chain(exp)
+                    total_puts  += chain.puts['volume'].fillna(0).sum()
+                    total_calls += chain.calls['volume'].fillna(0).sum()
+                except Exception:
+                    continue
+            if total_calls > 0 and total_puts > 0:
+                ratio = round(total_puts / total_calls, 2)
+                print(f"  Put/Call ratio (SPY options): {ratio}")
+                return ratio
+    except Exception as e:
+        print(f"⚠️  Put/call (yfinance): {e}")
+
+    # Fallback: CBOE CDN CSV
     urls = [
         "https://cdn.cboe.com/resources/options/volume_and_call_put_ratios/equitypc.csv",
         "https://cdn.cboe.com/resources/options/volume_and_call_put_ratios/totalpc.csv",
     ]
-    cutoff = datetime.today() - timedelta(days=60)  # reject data older than 60 days
+    cutoff = datetime.today() - timedelta(days=60)
     for url in urls:
         try:
             r = requests.get(url, headers=_HEADERS, timeout=15)
@@ -181,11 +205,10 @@ def scrape_put_call_ratio():
             for line in reversed(lines):
                 parts = [p.strip() for p in line.split(",")]
                 try:
-                    # columns: DATE, CALL, PUT, TOTAL, P/C Ratio
                     date_str = parts[0]
                     row_date = datetime.strptime(date_str, "%m/%d/%Y")
                     if row_date < cutoff:
-                        break   # data too old — stop scanning this file
+                        break
                     if len(parts) >= 5:
                         val = float(parts[4])
                     elif len(parts) >= 3:
@@ -194,14 +217,70 @@ def scrape_put_call_ratio():
                     else:
                         continue
                     if val and 0.1 < val < 5.0:
-                        print(f"  Put/Call ratio: {val}  ({date_str})")
+                        print(f"  Put/Call ratio (CBOE CSV): {val}  ({date_str})")
                         return round(val, 2)
                 except (ValueError, IndexError):
                     continue
         except Exception as e:
-            print(f"⚠️  Put/call ({url}): {e}")
-    print("⚠️  Put/call ratio: no recent data found — returning None")
+            print(f"⚠️  Put/call CBOE ({url}): {e}")
+    print("⚠️  Put/call ratio: all sources failed — returning None")
     return None
+
+
+def scrape_margin_debt():
+    """
+    Fetch latest NYSE margin debt from FINRA monthly statistics page.
+    Returns debit balance in billions USD (float) or None.
+    FINRA reports values in millions of dollars.
+    """
+    try:
+        from bs4 import BeautifulSoup
+        r = requests.get(
+            "https://www.finra.org/investors/learn-to-invest/advanced-investing/margin-statistics",
+            headers=_HEADERS, timeout=15
+        )
+        if r.status_code != 200:
+            print(f"⚠️  Margin debt: FINRA returned {r.status_code}")
+            return None
+        soup = BeautifulSoup(r.text, "html.parser")
+        table = soup.find("table")
+        if not table:
+            print("⚠️  Margin debt: no table found on FINRA page")
+            return None
+        # First data row = most recent month; col 1 = debit balance (millions $)
+        for row in table.find_all("tr")[1:]:
+            cells = [td.get_text(strip=True) for td in row.find_all("td")]
+            if len(cells) >= 2:
+                try:
+                    val_millions = float(cells[1].replace(",", ""))
+                    val_billions = round(val_millions / 1000, 1)
+                    print(f"  Margin debt ({cells[0]}): ${val_billions}B")
+                    return val_billions
+                except ValueError:
+                    continue
+        print("⚠️  Margin debt: could not parse FINRA table")
+        return None
+    except Exception as e:
+        print(f"⚠️  Margin debt scrape failed: {e}")
+        return None
+
+
+def fetch_sp500_pe():
+    """
+    Fetch S&P 500 trailing 12-month P/E ratio via yfinance (SPY ETF).
+    Returns P/E as float or None.
+    """
+    try:
+        import yfinance as yf
+        spy = yf.Ticker("SPY")
+        pe = spy.info.get("trailingPE")
+        if pe and 5 < pe < 100:
+            print(f"  S&P 500 trailing P/E: {pe:.1f}")
+            return round(float(pe), 1)
+        return None
+    except Exception as e:
+        print(f"⚠️  S&P P/E fetch failed: {e}")
+        return None
 
 
 def fetch_fear_greed():
@@ -371,9 +450,8 @@ def build_data():
     mmf_prev = fred_prev("WRMFNS")
     data["money_market_aum_prev"]   = round(mmf_prev["value"] / 1000, 2) if mmf_prev else None
 
-    # Margin debt: FINRA — scraped from finra.org/investors/margin-statistics
-    # TODO: implement scraper — leave placeholder
-    data["margin_debt"] = None
+    # Margin debt: FINRA monthly statistics (billions USD)
+    data["margin_debt"] = scrape_margin_debt()
 
     # ── VALUATIONS ───────────────────────────────────────────────────────────
     print("📊 Fetching valuation metrics...")
@@ -425,10 +503,8 @@ def build_data():
     else:
         data["copper_gold_ratio"] = None
 
-    # S&P 500 forward P/E: not freely available via API
-    # Best free source: scrape from multpl.com or use Quandl/Nasdaq Data Link
-    # TODO: implement scraper — leave placeholder
-    data["sp500_fwd_pe"] = None
+    # S&P 500 trailing P/E via yfinance (SPY); forward P/E not freely available
+    data["sp500_fwd_pe"] = fetch_sp500_pe()
 
     # Equity Risk Premium: calculated from fwd P/E and real yield
     if data["sp500_fwd_pe"] and data["real_yield_10y_latest"]:
