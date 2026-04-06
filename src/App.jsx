@@ -380,29 +380,29 @@ function CycleQuadrant({ cycle }) {
     return () => { document.removeEventListener("mousedown", h); document.removeEventListener("touchstart", h); };
   }, []);
   const Q = QUADRANTS[cycle.quadrant];
-  const dotX = 50 + cycle.growth * 34;
+  const dotX = 100 + cycle.growth * 66;
   const dotY = 50 - cycle.inflation * 34;
   const ql = [
-    { label: ["GOLDILOCKS"],          x: 73, y: 80, color: C.green,  q: "goldilocks" },
-    { label: ["INFLATIONARY","BOOM"], x: 72, y: 20, color: C.amber,  q: "boom" },
-    { label: ["STAGFLATION"],         x: 27, y: 20, color: C.red,    q: "stagflation" },
-    { label: ["DEFLATIONARY","BUST"], x: 27, y: 78, color: C.purple, q: "bust" },
+    { label: ["GOLDILOCKS"],          x: 150, y: 80, color: C.green,  q: "goldilocks" },
+    { label: ["INFLATIONARY","BOOM"], x: 150, y: 20, color: C.amber,  q: "boom" },
+    { label: ["STAGFLATION"],         x: 50,  y: 20, color: C.red,    q: "stagflation" },
+    { label: ["DEFLATIONARY","BUST"], x: 50,  y: 78, color: C.purple, q: "bust" },
   ];
   return (
     <Card>
       <div style={{ display: "flex", gap: 48, alignItems: "center" }}>
         <div style={{ flex: "0 0 1040px" }}>
-          <svg viewBox="0 0 100 100" width="100%" style={{ display: "block" }}>
-            <rect x="0" y="0" width="50" height="50" fill={C.red    + "0f"} />
-            <rect x="50" y="0" width="50" height="50" fill={C.amber  + "0a"} />
-            <rect x="0" y="50" width="50" height="50" fill={C.purple + "0a"} />
-            <rect x="50" y="50" width="50" height="50" fill={C.green  + "0a"} />
-            <line x1="50" y1="4" x2="50" y2="96" stroke={C.dim} strokeWidth="0.5" />
-            <line x1="4" y1="50" x2="96" y2="50" stroke={C.dim} strokeWidth="0.5" />
-            <text x="50" y="2.8" textAnchor="middle" fontSize="3.8" fill={C.muted} fontFamily={BOLD} fontWeight="700">INFLATION ↑</text>
-            <text x="50" y="99"  textAnchor="middle" fontSize="3.8" fill={C.muted} fontFamily={BOLD} fontWeight="700">INFLATION ↓</text>
-            <text x="2"  y="51.5" fontSize="3.2" fill={C.muted} fontFamily={BOLD} fontWeight="700">↓ GROWTH</text>
-            <text x="70" y="51.5" fontSize="3.2" fill={C.muted} fontFamily={BOLD} fontWeight="700">GROWTH ↑</text>
+          <svg viewBox="0 0 200 100" width="100%" style={{ display: "block" }}>
+            <rect x="0" y="0" width="100" height="50" fill={C.red    + "0f"} />
+            <rect x="100" y="0" width="100" height="50" fill={C.amber  + "0a"} />
+            <rect x="0" y="50" width="100" height="50" fill={C.purple + "0a"} />
+            <rect x="100" y="50" width="100" height="50" fill={C.green  + "0a"} />
+            <line x1="100" y1="4" x2="100" y2="96" stroke={C.dim} strokeWidth="0.5" />
+            <line x1="4" y1="50" x2="196" y2="50" stroke={C.dim} strokeWidth="0.5" />
+            <text x="100" y="2.8" textAnchor="middle" fontSize="3.8" fill={C.muted} fontFamily={BOLD} fontWeight="700">INFLATION ↑</text>
+            <text x="100" y="99"  textAnchor="middle" fontSize="3.8" fill={C.muted} fontFamily={BOLD} fontWeight="700">INFLATION ↓</text>
+            <text x="2"   y="51.5" fontSize="3.2" fill={C.muted} fontFamily={BOLD} fontWeight="700">↓ GROWTH</text>
+            <text x="166" y="51.5" fontSize="3.2" fill={C.muted} fontFamily={BOLD} fontWeight="700">GROWTH ↑</text>
             {ql.map(q => q.label.map((line, i) => (
               <text key={`${q.q}-${i}`} x={q.x} y={q.y + i * 5.5 - (q.label.length - 1) * 2.5} textAnchor="middle" fontSize="3.8"
                 fill={cycle.quadrant === q.q ? q.color : C.dim} fontFamily={BOLD}
