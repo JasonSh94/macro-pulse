@@ -384,7 +384,7 @@ function CycleQuadrant({ cycle }) {
   return (
     <Card>
       <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-        <div style={{ flex: "0 0 155px" }}>
+        <div style={{ flex: "0 0 110px" }}>
           <svg viewBox="0 0 100 100" width="100%" style={{ display: "block" }}>
             <rect x="0" y="0" width="50" height="50" fill={C.red    + "0f"} />
             <rect x="50" y="0" width="50" height="50" fill={C.amber  + "0a"} />
@@ -443,9 +443,6 @@ function CycleQuadrant({ cycle }) {
             )}
           </div>
         </div>
-      </div>
-      <div style={{ marginTop: 8, paddingTop: 8, borderTop: `1px solid ${C.border}`, fontSize: 12, lineHeight: 1.5, color: C.muted, fontFamily: SANS, fontStyle: "italic" }}>
-        "{Q.narrative ?? "Systematic signals are updating…"}"
       </div>
     </Card>
   );
