@@ -694,7 +694,8 @@ export default function App() {
       <GoogleFonts />
 
       {/* HEADER */}
-      <div style={{ background: C.surface, borderBottom: `1px solid ${C.border}`, padding: "12px 16px 0", position: "sticky", top: 0, zIndex: 100 }}>
+      <div style={{ background: C.surface, borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, zIndex: 100 }}>
+        <div style={{ maxWidth: 640, margin: "0 auto", padding: "12px 16px 0" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
           <span style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 20, letterSpacing: "-0.02em" }}>Macro Pulse</span>
           <div style={{ textAlign: "right" }}>
@@ -718,18 +719,21 @@ export default function App() {
             }}>{t.label}</button>
           ))}
         </div>
+        </div>
       </div>
 
-      <div style={{ padding: "6px 12px 24px" }}>
+      <div style={{ maxWidth: 640, margin: "0 auto", padding: "6px 12px 24px" }}>
         {tab === "regime"     && <RegimeTab cycle={cycle} live={live} onSelectFactor={setSelectedFactor} />}
         {tab === "sentiment"  && <SentimentTab live={live} />}
         {tab === "valuations" && <ValuationsTab live={live} />}
       </div>
 
       <div style={{ borderTop: `1px solid ${C.border}`, padding: "12px 16px", textAlign: "center" }}>
-        <div style={{ fontSize: 9, fontFamily: SANS, color: C.dim, lineHeight: 2 }}>
-          For illustrative purposes only · Not financial advice<br />
-          Sources: FRED · BLS · BEA · Yahoo Finance · CNN · AAII · CBOE
+        <div style={{ maxWidth: 640, margin: "0 auto" }}>
+          <div style={{ fontSize: 9, fontFamily: SANS, color: C.dim, lineHeight: 2 }}>
+            For illustrative purposes only · Not financial advice<br />
+            Sources: FRED · BLS · BEA · Yahoo Finance · CNN · AAII · CBOE
+          </div>
         </div>
       </div>
 
