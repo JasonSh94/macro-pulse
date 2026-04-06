@@ -710,11 +710,12 @@ def build_data():
 
     # Yield time series
     data["yield_chart"] = {
-        "y2":    fred("DGS2",    start=TWO_YEARS_AGO),
-        "y10":   fred("DGS10",   start=TWO_YEARS_AGO),
-        "real10":fred("DFII10",  start=TWO_YEARS_AGO),
+        "y2":    fred("DGS2",         start=TWO_YEARS_AGO),
+        "y10":   fred("DGS10",        start=TWO_YEARS_AGO),
+        "real10":fred("DFII10",       start=TWO_YEARS_AGO),
         "hy":    fred("BAMLH0A0HYM2", start=TWO_YEARS_AGO),
-        "be10":  fred("T10YIE",  start=TWO_YEARS_AGO),
+        "ig":    fred("BAMLC0A0CM",   start=TWO_YEARS_AGO),
+        "be10":  fred("T10YIE",       start=TWO_YEARS_AGO),
     }
 
     # ── GLOBAL SNAPSHOT ───────────────────────────────────────────────────────

@@ -193,16 +193,16 @@ const GDP_DATA = [
   { q:"Q2'24",consumption:1.8,investment:0.4,govt:0.9,netExports:-0.6 },
 ];
 const YIELD_DATA = [
-  { m:"Jan'23",y2:4.42,y10:3.88,real10:1.54,hy:4.52 },
-  { m:"Apr'23",y2:4.34,y10:3.57,real10:1.42,hy:4.31 },
-  { m:"Jul'23",y2:4.87,y10:3.97,real10:1.88,hy:3.98 },
-  { m:"Oct'23",y2:5.02,y10:4.93,real10:2.45,hy:4.65 },
-  { m:"Jan'24",y2:4.38,y10:4.03,real10:1.91,hy:3.42 },
-  { m:"Apr'24",y2:4.97,y10:4.67,real10:2.21,hy:3.24 },
-  { m:"Jul'24",y2:4.26,y10:4.20,real10:1.97,hy:3.17 },
-  { m:"Oct'24",y2:4.14,y10:4.28,real10:2.02,hy:2.95 },
-  { m:"Jan'25",y2:4.27,y10:4.52,real10:2.14,hy:3.05 },
-  { m:"Mar'25",y2:4.01,y10:4.31,real10:2.07,hy:3.74 },
+  { m:"Jan'23",y2:4.42,y10:3.88,real10:1.54,hy:4.52,ig:1.32 },
+  { m:"Apr'23",y2:4.34,y10:3.57,real10:1.42,hy:4.31,ig:1.25 },
+  { m:"Jul'23",y2:4.87,y10:3.97,real10:1.88,hy:3.98,ig:1.18 },
+  { m:"Oct'23",y2:5.02,y10:4.93,real10:2.45,hy:4.65,ig:1.45 },
+  { m:"Jan'24",y2:4.38,y10:4.03,real10:1.91,hy:3.42,ig:1.12 },
+  { m:"Apr'24",y2:4.97,y10:4.67,real10:2.21,hy:3.24,ig:1.05 },
+  { m:"Jul'24",y2:4.26,y10:4.20,real10:1.97,hy:3.17,ig:1.04 },
+  { m:"Oct'24",y2:4.14,y10:4.28,real10:2.02,hy:2.95,ig:0.98 },
+  { m:"Jan'25",y2:4.27,y10:4.52,real10:2.14,hy:3.05,ig:1.02 },
+  { m:"Mar'25",y2:4.01,y10:4.31,real10:2.07,hy:3.74,ig:1.38 },
 ];
 const CPI_DATA = [
   { m:"Jan'23",shelter:3.1,supercore:1.8,food:1.0,energy:-0.8,goods:-0.2 },
@@ -506,8 +506,7 @@ function FactorCard({ quadrant, onSelectFactor }) {
   const all = [...STYLE_FACTORS, ...MACRO_FACTORS];
   return (
     <Card>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-        <span style={{ fontSize: 16, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted }}>FACTOR REGIME SIGNALS</span>
+      <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginBottom: 10 }}>
         <div style={{ display: "flex", gap: 10 }}>
           {[["FAVORED","good"],["NEUTRAL","warn"],["AVOID","bad"]].map(([l,s]) => (
             <span key={s} style={{ fontSize: 14, fontFamily: BOLD, fontWeight: 700, color: sigCol(s), display: "flex", alignItems: "center", gap: 3 }}>
@@ -589,9 +588,9 @@ function ValuationsTab({ live }) {
   const yieldChart = (L?.yield_chart)
     ? (() => {
         const merged = {};
-        ["y2","y10","real10","hy","be10"].forEach(k => {
-          const key = { y2:"y2", y10:"y10", real10:"real10", hy:"hy", be10:"be10" }[k];
-          const src = L.yield_chart[{ y2:"y2",y10:"y10",real10:"real10",hy:"hy",be10:"be10" }[k]];
+        ["y2","y10","real10","hy","ig","be10"].forEach(k => {
+          const key = { y2:"y2", y10:"y10", real10:"real10", hy:"hy", ig:"ig", be10:"be10" }[k];
+          const src = L.yield_chart[{ y2:"y2",y10:"y10",real10:"real10",hy:"hy",ig:"ig",be10:"be10" }[k]];
           if (!src) return;
           src.forEach(({ date, value }) => {
             const m = date.slice(0,7);
@@ -620,9 +619,10 @@ function ValuationsTab({ live }) {
           <Line type="monotone" dataKey="y10"   stroke={C.amber}  strokeWidth={2}   dot={false} name="10Y Tsy" />
           <Line type="monotone" dataKey="real10" stroke={C.green} strokeWidth={1.5} dot={false} name="10Y Real" />
           <Line type="monotone" dataKey="hy"    stroke={C.red}    strokeWidth={1.5} dot={false} name="HY Spread" strokeDasharray="4 2" />
+          <Line type="monotone" dataKey="ig"    stroke={C.purple} strokeWidth={1.5} dot={false} name="IG Spread" strokeDasharray="3 2" />
         </LineChart>
       </ResponsiveContainer>
-      <Legend items={[["2Y Tsy",C.blue],["10Y Tsy",C.amber],["10Y Real",C.green],["HY Spread",C.red]]} />
+      <Legend items={[["2Y Tsy",C.blue],["10Y Tsy",C.amber],["10Y Real",C.green],["HY Spread",C.red],["IG Spread",C.purple]]} />
     </Card>
     <SecLabel>GLOBAL SNAPSHOT</SecLabel>
     <Card>
@@ -761,7 +761,7 @@ export default function App() {
 
       {/* HEADER */}
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, zIndex: 100 }}>
-        <div style={{ maxWidth: 1900, margin: "0 auto", padding: "12px 16px 0" }}>
+        <div style={{ maxWidth: 1900, margin: "0 auto", padding: "12px 28px 0" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
           <span style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 32, letterSpacing: "-0.02em" }}>Macro Pulse</span>
           <div style={{ textAlign: "right" }}>
@@ -785,7 +785,7 @@ export default function App() {
         <div style={{ display: "flex" }}>
           {TABS.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)} style={{
-              background: "none", border: "none", padding: "7px 13px",
+              background: "none", border: "none", padding: "7px 13px 14px",
               fontSize: 16, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em",
               color: tab === t.id ? C.amber : C.muted,
               borderBottom: `2px solid ${tab === t.id ? C.amber : "transparent"}`,
@@ -796,7 +796,7 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1900, margin: "0 auto", padding: "6px 12px 24px" }}>
+      <div style={{ maxWidth: 1900, margin: "0 auto", padding: "6px 28px 24px" }}>
         {tab === "regime"     && <RegimeTab cycle={cycle} live={live} onSelectFactor={setSelectedFactor} />}
         {tab === "sentiment"  && <SentimentTab live={live} />}
         {tab === "valuations" && <ValuationsTab live={live} />}
