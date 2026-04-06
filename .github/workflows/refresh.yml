@@ -1,0 +1,40 @@
+name: Daily Data Refresh
+
+on:
+  schedule:
+    # 8am UTC weekdays — after US pre-market data drops (PCE, claims etc. release ~8:30am ET)
+    - cron: "0 8 * * 1-5"
+  workflow_dispatch:
+    # Allow manual trigger from GitHub Actions tab (useful for testing)
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # needed to commit data.json back to repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run data pipeline
+        run: python macro_pulse_pipeline.py
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+
+      - name: Commit and push data.json
+        run: |
+          git config user.name  "macro-pulse-bot"
+          git config user.email "bot@macro-pulse.io"
+          git add public/data.json
+          # Only commit if data.json actually changed
+          git diff --cached --quiet || git commit -m "data: refresh $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
