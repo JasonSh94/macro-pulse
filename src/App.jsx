@@ -659,9 +659,21 @@ function FundamentalsTab({ live }) {
   </>;
 }
 
+// ── REGIME TAB ─────────────────────────────────────────────────────────────────
+function RegimeTab({ cycle, live, onSelectFactor }) {
+  return <>
+    <SecLabel>CYCLE POSITIONING</SecLabel>
+    <CycleQuadrant cycle={cycle} />
+    <SecLabel>FACTOR REGIME SCORECARD</SecLabel>
+    <FactorCard quadrant={cycle.quadrant} onSelectFactor={onSelectFactor} />
+    <SecLabel>MACRO FUNDAMENTALS</SecLabel>
+    <FundamentalsTab live={live} />
+  </>;
+}
+
 // ── APP ────────────────────────────────────────────────────────────────────────
 export default function App() {
-  const [tab, setTab] = useState("sentiment");
+  const [tab, setTab] = useState("regime");
   const [selectedFactor, setSelectedFactor] = useState(null);
   const { live, status } = useLiveData();
 
@@ -671,9 +683,9 @@ export default function App() {
     : (live ? computeCycleFromLive(live) : null) ?? computeCycleFromDemo();
 
   const TABS = [
-    { id: "sentiment",    label: "SENTIMENT" },
-    { id: "valuations",   label: "VALUATIONS" },
-    { id: "fundamentals", label: "FUNDAMENTALS" },
+    { id: "regime",      label: "REGIME" },
+    { id: "sentiment",   label: "SENTIMENT" },
+    { id: "valuations",  label: "VALUATIONS" },
   ];
 
   const lastUpdated = live?.last_updated
@@ -712,14 +724,9 @@ export default function App() {
       </div>
 
       <div style={{ padding: "14px 14px 40px" }}>
-        <SecLabel>CYCLE POSITIONING</SecLabel>
-        <CycleQuadrant cycle={cycle} />
-        <SecLabel>FACTOR REGIME SCORECARD</SecLabel>
-        <FactorCard quadrant={cycle.quadrant} onSelectFactor={setSelectedFactor} />
-        <SecLabel>{TABS.find(t => t.id === tab)?.label}</SecLabel>
-        {tab === "sentiment"    && <SentimentTab    live={live} />}
-        {tab === "valuations"   && <ValuationsTab   live={live} />}
-        {tab === "fundamentals" && <FundamentalsTab live={live} />}
+        {tab === "regime"     && <RegimeTab cycle={cycle} live={live} onSelectFactor={setSelectedFactor} />}
+        {tab === "sentiment"  && <SentimentTab live={live} />}
+        {tab === "valuations" && <ValuationsTab live={live} />}
       </div>
 
       <div style={{ borderTop: `1px solid ${C.border}`, padding: "12px 16px", textAlign: "center" }}>
