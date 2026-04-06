@@ -249,10 +249,10 @@ def build_data():
     # TODO: implement scraper — leave placeholder
     data["naaim_exposure"] = None
 
-    # Money market fund assets: FRED WRMFSL
-    mmf = fred_latest("WRMFSL")
+    # Money market fund assets: FRED WRMFNS (WRMFSL was discontinued 2021)
+    mmf = fred_latest("WRMFNS")
     data["money_market_aum_latest"] = round(mmf["value"] / 1000, 2) if mmf else None  # convert to trillions
-    mmf_prev = fred_prev("WRMFSL")
+    mmf_prev = fred_prev("WRMFNS")
     data["money_market_aum_prev"]   = round(mmf_prev["value"] / 1000, 2) if mmf_prev else None
 
     # Margin debt: FINRA — scraped from finra.org/investors/margin-statistics
