@@ -24,6 +24,7 @@ import yfinance as yf
 import pandas as pd
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup
 
 load_dotenv()
 FRED_KEY = os.getenv("FRED_API_KEY")
@@ -119,6 +120,113 @@ def yf_series(ticker, start=TWO_YEARS_AGO, field="Close"):
         return []
 
 
+# ── WEB SCRAPERS ──────────────────────────────────────────────────────────────
+
+_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+}
+
+
+def scrape_aaii_sentiment():
+    """
+    Scrape AAII weekly sentiment survey.
+    Returns {bull, neutral, bear, spread} or None on failure.
+    """
+    try:
+        r = requests.get(
+            "https://www.aaii.com/sentimentsurvey/sent_results",
+            headers=_HEADERS, timeout=20
+        )
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, "html.parser")
+        for table in soup.find_all("table"):
+            rows = table.find_all("tr")
+            for row in rows[1:]:
+                cells = [c.get_text(strip=True).replace("%", "") for c in row.find_all("td")]
+                if len(cells) >= 4:
+                    try:
+                        bull    = round(float(cells[1]), 1)
+                        neutral = round(float(cells[2]), 1)
+                        bear    = round(float(cells[3]), 1)
+                        spread  = round(bull - bear, 1)
+                        print(f"  AAII: Bull {bull}%  Bear {bear}%  Spread {spread:+.1f}pts")
+                        return {"bull": bull, "neutral": neutral, "bear": bear, "spread": spread}
+                    except (ValueError, IndexError):
+                        continue
+        print("⚠️  AAII: could not parse table")
+        return None
+    except Exception as e:
+        print(f"⚠️  AAII scrape failed: {e}")
+        return None
+
+
+def scrape_put_call_ratio():
+    """
+    Fetch CBOE equity put/call ratio from CDN CSV.
+    Returns latest ratio (float) or None.
+    """
+    urls = [
+        "https://cdn.cboe.com/resources/options/volume_and_call_put_ratios/equitypc.csv",
+        "https://cdn.cboe.com/resources/options/volume_and_call_put_ratios/totalpc.csv",
+    ]
+    cutoff = datetime.today() - timedelta(days=60)  # reject data older than 60 days
+    for url in urls:
+        try:
+            r = requests.get(url, headers=_HEADERS, timeout=15)
+            if r.status_code != 200:
+                continue
+            lines = [l.strip() for l in r.text.strip().splitlines() if l.strip()]
+            for line in reversed(lines):
+                parts = [p.strip() for p in line.split(",")]
+                try:
+                    # columns: DATE, CALL, PUT, TOTAL, P/C Ratio
+                    date_str = parts[0]
+                    row_date = datetime.strptime(date_str, "%m/%d/%Y")
+                    if row_date < cutoff:
+                        break   # data too old — stop scanning this file
+                    if len(parts) >= 5:
+                        val = float(parts[4])
+                    elif len(parts) >= 3:
+                        calls, puts = float(parts[1]), float(parts[2])
+                        val = round(puts / calls, 2) if calls > 0 else None
+                    else:
+                        continue
+                    if val and 0.1 < val < 5.0:
+                        print(f"  Put/Call ratio: {val}  ({date_str})")
+                        return round(val, 2)
+                except (ValueError, IndexError):
+                    continue
+        except Exception as e:
+            print(f"⚠️  Put/call ({url}): {e}")
+    print("⚠️  Put/call ratio: no recent data found — returning None")
+    return None
+
+
+def fetch_fear_greed():
+    """
+    Fetch CNN Fear & Greed index score (0–100).
+    Returns float or None.
+    """
+    try:
+        r = requests.get(
+            "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
+            headers={**_HEADERS, "Referer": "https://www.cnn.com/", "Origin": "https://www.cnn.com"},
+            timeout=15,
+        )
+        r.raise_for_status()
+        data = r.json()
+        score = data.get("fear_and_greed", {}).get("score")
+        if score is not None:
+            print(f"  Fear & Greed: {score}")
+            return round(float(score), 1)
+        return None
+    except Exception as e:
+        print(f"⚠️  Fear & Greed fetch failed: {e}")
+        return None
+
+
 # ── SCORING ENGINE ────────────────────────────────────────────────────────────
 
 def compute_cycle(metrics):
@@ -136,10 +244,15 @@ def compute_cycle(metrics):
         g = max(-1, min(1, spread / 2))  # normalise: -2% maps to -1, +2% maps to +1
         signals.append({"growth": g, "inflation": 0.0, "weight": 1.5})
 
-    # ISM Manufacturing: <50 = contraction
+    # Manufacturing activity (ISM PMI or Philly Fed proxy)
+    # ISM-scale: 50-centred (range ~40-65). Philly Fed: 0-centred (range ~-50 to +50).
+    # Detect scale by value range and normalise to -1/+1 accordingly.
     if metrics.get("ism_manufacturing") is not None:
         ism = metrics["ism_manufacturing"]
-        g = max(-1, min(1, (ism - 50) / 10))
+        if -30 <= ism <= 30:   # Philly Fed / 0-centred diffusion index
+            g = max(-1, min(1, ism / 25))
+        else:                   # ISM-style 50-centred
+            g = max(-1, min(1, (ism - 50) / 10))
         signals.append({"growth": g, "inflation": 0.2, "weight": 1.2})
 
     # Initial claims: higher = worse growth
@@ -230,28 +343,27 @@ def build_data():
     # ── SENTIMENT ────────────────────────────────────────────────────────────
     print("📊 Fetching sentiment metrics...")
 
-    # VIX (Yahoo Finance: ^VIX)
-    data["vix_latest"] = yf_latest("^VIX")
-    data["vix_prev"]   = None  # will calculate below from series
+    # VIX (Yahoo Finance: ^VIX) — latest + prev from series
+    vix_series = yf_series("^VIX")
+    data["vix_latest"] = round(vix_series[-1]["value"], 2) if vix_series else None
+    data["vix_prev"]   = round(vix_series[-2]["value"], 2) if len(vix_series) >= 2 else None
 
-    # Equity flows proxy: SPY net flows (simplified via price action + volume)
-    # In production: use ICI weekly flow data (scraped from ici.org)
-    # For now, we leave a placeholder
-    data["equity_flows_4w"] = None  # TODO: scrape ICI
+    # CNN Fear & Greed index (0–100)
+    data["fear_greed"] = fetch_fear_greed()
 
-    # AAII Bull-Bear spread: from AAII website (scraped weekly)
-    # https://www.aaii.com/sentimentsurvey/sent_results
-    # TODO: implement scraper — leave placeholder
-    data["aaii_bull_bear"] = None
+    # AAII Bull-Bear spread (scraped weekly from aaii.com)
+    aaii = scrape_aaii_sentiment()
+    data["aaii_bull"]    = aaii["bull"]    if aaii else None
+    data["aaii_neutral"] = aaii["neutral"] if aaii else None
+    data["aaii_bear"]    = aaii["bear"]    if aaii else None
+    data["aaii_spread"]  = aaii["spread"]  if aaii else None   # bull minus bear, in pts
 
-    # Put/Call ratio: CBOE daily data
-    # https://www.cboe.com/us/options/market_statistics/daily/
-    # TODO: implement scraper — leave placeholder
-    data["put_call_ratio"] = None
+    # Put/Call ratio: CBOE equity options
+    data["put_call_ratio"] = scrape_put_call_ratio()
 
-    # NAAIM: scraped from naaim.org weekly
-    # TODO: implement scraper — leave placeholder
-    data["naaim_exposure"] = None
+    # Equity flows & NAAIM: TODO scrapers
+    data["equity_flows_4w"] = None
+    data["naaim_exposure"]  = None
 
     # Money market fund assets: FRED WRMFNS (WRMFSL was discontinued 2021)
     mmf = fred_latest("WRMFNS")
@@ -376,13 +488,27 @@ def build_data():
     else:
         data["m2_yoy"] = None
 
-    # Conference Board LEI: FRED USALOLITONOSTSAM
-    lei = fred_latest("USALOLITONOSTSAM")
-    data["lei_latest"] = lei["value"] if lei else None
+    # Conference Board LEI: FRED USALOLITONOSTSAM — compute YoY %
+    lei_series = fred("USALOLITONOSTSAM", start=TEN_YEARS_AGO)
+    if len(lei_series) >= 14:
+        data["lei_yoy"]      = round((lei_series[-1]["value"] / lei_series[-13]["value"] - 1) * 100, 2)
+        data["lei_prev_yoy"] = round((lei_series[-2]["value"] / lei_series[-14]["value"] - 1) * 100, 2)
+    else:
+        data["lei_yoy"]      = None
+        data["lei_prev_yoy"] = None
 
-    # ISM Manufacturing: not on FRED — TODO scrape from ismworld.org
-    data["ism_manufacturing"] = None
-    data["ism_services"]      = None
+    # Manufacturing activity proxy: Philadelphia Fed General Activity Diffusion Index (SA, monthly)
+    # FRED: GACDFSA066MSFRBPHI — 0-centred; >0 = expansion, <0 = contraction.
+    # ISM Manufacturing PMI is proprietary (not on FRED); Philly Fed is the best free substitute.
+    # The cycle-scoring engine normalises whichever scale is detected (see compute_cycle).
+    philly = fred_latest("GACDFSA066MSFRBPHI")
+    data["ism_manufacturing"] = philly["value"] if philly else None
+    philly_p = fred_prev("GACDFSA066MSFRBPHI")
+    data["ism_manufacturing_prev"] = philly_p["value"] if philly_p else None
+    data["ism_source"] = "Philly Fed" if philly else None
+
+    # ISM Services: no reliable free FRED series — TODO scrape ismworld.org
+    data["ism_services"] = None
 
     # ── TIME SERIES FOR CHARTS ────────────────────────────────────────────────
     print("📈 Fetching chart series...")
@@ -400,7 +526,7 @@ def build_data():
         "shelter":    fred("CUSR0000SAH1",  start=TWO_YEARS_AGO),
         "supercore":  fred("CUSR0000SASLE", start=TWO_YEARS_AGO),  # services less shelter
         "energy":     fred("CPIENGSL",       start=TWO_YEARS_AGO),
-        "food":       fred("CUSR0000SAF",   start=TWO_YEARS_AGO),
+        "food":       fred("CPIFABSL",       start=TWO_YEARS_AGO),  # CPI: Food and Beverages SA
         "goods":      fred("CUSR0000SACL1E",start=TWO_YEARS_AGO),  # commodities less food and energy
     }
 

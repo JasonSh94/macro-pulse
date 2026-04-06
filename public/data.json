@@ -1,9 +1,13 @@
 {
-  "vix_latest": 24.52,
-  "vix_prev": null,
-  "equity_flows_4w": null,
-  "aaii_bull_bear": null,
+  "vix_latest": 23.87,
+  "vix_prev": 24.54,
+  "fear_greed": 19.3,
+  "aaii_bull": 33.6,
+  "aaii_neutral": 15.0,
+  "aaii_bear": 51.4,
+  "aaii_spread": -17.8,
   "put_call_ratio": null,
+  "equity_flows_4w": null,
   "naaim_exposure": null,
   "money_market_aum_latest": 2.27,
   "money_market_aum_prev": 2.28,
@@ -24,13 +28,13 @@
   "hy_spread_prev": 3.16,
   "sp500_latest": 6582.6899,
   "sp500_chg_pct": 0.11,
-  "dxy_latest": 99.878,
-  "dxy_chg_pct": -0.15,
-  "gold_latest": 4724.5,
-  "wti_latest": 109.31,
-  "wti_chg_pct": -2.0,
-  "btc_latest": 69443.6562,
-  "btc_chg_pct": 0.67,
+  "dxy_latest": 99.989,
+  "dxy_chg_pct": -0.04,
+  "gold_latest": 4713.8999,
+  "wti_latest": 110.32,
+  "wti_chg_pct": -1.09,
+  "btc_latest": 69655.7031,
+  "btc_chg_pct": 0.98,
   "copper_gold_ratio": 0.0012,
   "sp500_fwd_pe": null,
   "equity_risk_premium": null,
@@ -46,8 +50,11 @@
   "initial_claims_prev": 211000,
   "fed_funds_latest": 3.64,
   "m2_yoy": 4.88,
-  "lei_latest": null,
-  "ism_manufacturing": null,
+  "lei_yoy": 0.93,
+  "lei_prev_yoy": 0.78,
+  "ism_manufacturing": 18.1,
+  "ism_manufacturing_prev": 16.3,
+  "ism_source": "Philly Fed",
   "ism_services": null,
   "gdp_chart": {
     "consumption": [
@@ -954,7 +961,96 @@
         "value": 283.223
       }
     ],
-    "food": [],
+    "food": [
+      {
+        "date": "2024-04-01",
+        "value": 325.894
+      },
+      {
+        "date": "2024-05-01",
+        "value": 326.385
+      },
+      {
+        "date": "2024-06-01",
+        "value": 327.042
+      },
+      {
+        "date": "2024-07-01",
+        "value": 327.74
+      },
+      {
+        "date": "2024-08-01",
+        "value": 328.154
+      },
+      {
+        "date": "2024-09-01",
+        "value": 329.109
+      },
+      {
+        "date": "2024-10-01",
+        "value": 329.851
+      },
+      {
+        "date": "2024-11-01",
+        "value": 330.937
+      },
+      {
+        "date": "2024-12-01",
+        "value": 331.65
+      },
+      {
+        "date": "2025-01-01",
+        "value": 332.626
+      },
+      {
+        "date": "2025-02-01",
+        "value": 333.302
+      },
+      {
+        "date": "2025-03-01",
+        "value": 334.527
+      },
+      {
+        "date": "2025-04-01",
+        "value": 334.68
+      },
+      {
+        "date": "2025-05-01",
+        "value": 335.571
+      },
+      {
+        "date": "2025-06-01",
+        "value": 336.527
+      },
+      {
+        "date": "2025-07-01",
+        "value": 336.941
+      },
+      {
+        "date": "2025-08-01",
+        "value": 338.39
+      },
+      {
+        "date": "2025-09-01",
+        "value": 339.145
+      },
+      {
+        "date": "2025-11-01",
+        "value": 339.478
+      },
+      {
+        "date": "2025-12-01",
+        "value": 341.563
+      },
+      {
+        "date": "2026-01-01",
+        "value": 342.194
+      },
+      {
+        "date": "2026-02-01",
+        "value": 343.477
+      }
+    ],
     "goods": [
       {
         "date": "2024-04-01",
@@ -11097,11 +11193,11 @@
     "uk_cpi": null
   },
   "cycle": {
-    "growth": -0.196,
-    "inflation": 0.121,
+    "growth": -0.084,
+    "inflation": 0.13,
     "quadrant": "stagflation",
     "confidence": 0
   },
-  "last_updated": "2026-04-06T09:14:38.585412Z",
+  "last_updated": "2026-04-06T11:37:17.391371Z",
   "data_note": "Live data from FRED API and Yahoo Finance. Some metrics (ISM, AAII, Put/Call, NAAIM, margin debt) are pending scraper implementation and fall back to hardcoded demo values."
 }
