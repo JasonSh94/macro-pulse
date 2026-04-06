@@ -36,7 +36,7 @@ TEN_YEARS_AGO = (datetime.today() - timedelta(days=3650)).strftime("%Y-%m-%d")
 # ── FRED HELPERS ──────────────────────────────────────────────────────────────
 
 def fred(series_id, start=TWO_YEARS_AGO, end=TODAY, frequency=None):
-    """Fetch a FRED series. Returns list of {date, value} dicts."""
+    """Fetch a FRED series. Returns list of {date, value} dicts, or [] on error."""
     params = {
         "series_id": series_id,
         "api_key": FRED_KEY,
@@ -49,13 +49,17 @@ def fred(series_id, start=TWO_YEARS_AGO, end=TODAY, frequency=None):
         params["frequency"] = frequency
         params["aggregation_method"] = "avg"
 
-    r = requests.get(FRED_URL, params=params)
-    r.raise_for_status()
-    obs = r.json().get("observations", [])
-    return [
-        {"date": o["date"], "value": float(o["value"])}
-        for o in obs if o["value"] != "."
-    ]
+    try:
+        r = requests.get(FRED_URL, params=params)
+        r.raise_for_status()
+        obs = r.json().get("observations", [])
+        return [
+            {"date": o["date"], "value": float(o["value"])}
+            for o in obs if o["value"] != "."
+        ]
+    except Exception as e:
+        print(f"⚠️  FRED series {series_id} failed: {e}")
+        return []
 
 
 def fred_latest(series_id):
@@ -415,7 +419,7 @@ def build_data():
     # ECB/BOE/BOJ rates: FRED
     data["global"] = {
         "ecb_rate": fred_latest("ECBDFR"),    # ECB deposit facility rate
-        "boe_rate": fred_latest("BOEBR"),     # Bank of England base rate
+        "boe_rate": fred_latest("BOERUKM"),    # Bank of England base rate
         "boj_rate": None,                      # TODO: scrape BOJ
         "eu_cpi":   None,                      # TODO: Eurostat
         "uk_cpi":   None,                      # TODO: ONS
