@@ -16,17 +16,24 @@ function GoogleFonts() {
   return null;
 }
 
-const C = {
+const DARK_C = {
   bg: "#080910", surface: "#0c0e17", card: "#10121d", border: "#1c1f32", borderBright: "#2a2e4a",
   text: "#dde1f0", muted: "#5a6080", dim: "#2e3250",
   amber: "#e8a020", amberDim: "#e8a02018", green: "#27c87e", greenDim: "#27c87e18",
   red: "#e8445a", redDim: "#e8445a18", blue: "#4a94f0", purple: "#9068f0",
 };
+const LIGHT_C = {
+  bg: "#f0f2f8", surface: "#ffffff", card: "#f5f6fb", border: "#dde1ef", borderBright: "#c0c5db",
+  text: "#1a1d2e", muted: "#6b7094", dim: "#c0c5d8",
+  amber: "#c97a00", amberDim: "#e8a02018", green: "#1a9e60", greenDim: "#27c87e18",
+  red: "#cc2a3e", redDim: "#e8445a18", blue: "#2a6fd4", purple: "#6a48d4",
+};
+let C = { ...DARK_C };
 const BOLD = "'Bricolage Grotesque', system-ui, sans-serif";
 const SANS = "'IBM Plex Sans', system-ui, sans-serif";
 const MONO = "'IBM Plex Mono', monospace"; // chart axes + table numerics only
-const AXIS_TICK = { fontSize: 9, fill: C.muted, fontFamily: MONO };
-const TT_STYLE  = { backgroundColor: "#181b2e", border: `1px solid ${C.borderBright}`, borderRadius: 6, fontSize: 11, fontFamily: SANS, color: C.text };
+let AXIS_TICK = { fontSize: 9, fill: C.muted, fontFamily: MONO };
+let TT_STYLE  = { backgroundColor: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 6, fontSize: 11, fontFamily: SANS, color: C.text };
 
 // ── LIVE DATA HOOK ────────────────────────────────────────────────────────────
 /**
@@ -243,7 +250,7 @@ function Tip({ text, children }) {
     <span ref={ref} style={{ position: "relative", display: "inline-block" }}>
       <span onClick={() => setOpen(v => !v)} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} style={{ cursor: "help" }}>{children}</span>
       {open && (
-        <span style={{ position: "absolute", bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)", minWidth: 240, maxWidth: 300, background: "#181b2e", border: `1px solid ${C.borderBright}`, borderRadius: 8, padding: "11px 13px", fontSize: 12, lineHeight: 1.6, color: C.text, fontFamily: SANS, zIndex: 9999, boxShadow: "0 12px 40px rgba(0,0,0,0.7)", whiteSpace: "normal", pointerEvents: "none" }}>
+        <span style={{ position: "absolute", bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)", minWidth: 240, maxWidth: 300, background: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 8, padding: "11px 13px", fontSize: 12, lineHeight: 1.6, color: C.text, fontFamily: SANS, zIndex: 9999, boxShadow: "0 12px 40px rgba(0,0,0,0.7)", whiteSpace: "normal", pointerEvents: "none" }}>
           <span style={{ color: C.amber, fontWeight: 700, fontSize: 9, fontFamily: BOLD, letterSpacing: "0.12em", display: "block", marginBottom: 5 }}>SO WHAT?</span>
           {text}
         </span>
@@ -384,7 +391,7 @@ function CycleQuadrant({ cycle }) {
   return (
     <Card>
       <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-        <div style={{ flex: "0 0 110px" }}>
+        <div style={{ flex: "0 0 160px" }}>
           <svg viewBox="0 0 100 100" width="100%" style={{ display: "block" }}>
             <rect x="0" y="0" width="50" height="50" fill={C.red    + "0f"} />
             <rect x="50" y="0" width="50" height="50" fill={C.amber  + "0a"} />
@@ -415,7 +422,7 @@ function CycleQuadrant({ cycle }) {
               <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted }}>SIGNAL CONFIDENCE</span>
               <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: Q.color }}>{cycle.confidence}%</span>
             </div>
-            <div style={{ height: 3, background: C.border, borderRadius: 2 }}>
+            <div style={{ height: 3, background: C.border, borderRadius: 2, maxWidth: 220 }}>
               <div style={{ height: "100%", width: `${cycle.confidence}%`, background: Q.color, borderRadius: 2 }} />
             </div>
           </div>
@@ -672,7 +679,13 @@ function RegimeTab({ cycle, live, onSelectFactor }) {
 export default function App() {
   const [tab, setTab] = useState("regime");
   const [selectedFactor, setSelectedFactor] = useState(null);
+  const [dark, setDark] = useState(true);
   const { live, status } = useLiveData();
+
+  // Sync theme palette before any render
+  C = dark ? DARK_C : LIGHT_C;
+  AXIS_TICK = { fontSize: 9, fill: C.muted, fontFamily: MONO };
+  TT_STYLE  = { backgroundColor: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 6, fontSize: 11, fontFamily: SANS, color: C.text };
 
   // Compute cycle from live data if available, else demo scores
   const cycle = (live && live.cycle)
@@ -695,7 +708,7 @@ export default function App() {
 
       {/* HEADER */}
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, zIndex: 100 }}>
-        <div style={{ maxWidth: 640, margin: "0 auto", padding: "12px 16px 0" }}>
+        <div style={{ maxWidth: 860, margin: "0 auto", padding: "12px 16px 0" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
           <span style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 20, letterSpacing: "-0.02em" }}>Macro Pulse</span>
           <div style={{ textAlign: "right" }}>
@@ -706,6 +719,14 @@ export default function App() {
               color: status === "live" ? C.green : status === "demo" ? C.amber : C.dim }}>
               {status === "live" ? `● LIVE · ${lastUpdated}` : status === "demo" ? "● DEMO DATA" : "● LOADING…"}
             </div>
+            <button onClick={() => setDark(v => !v)} style={{
+              marginTop: 5, background: C.card, border: `1px solid ${C.border}`,
+              borderRadius: 20, padding: "3px 9px", cursor: "pointer",
+              fontSize: 8, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em",
+              color: C.muted, display: "inline-flex", alignItems: "center", gap: 4,
+            }}>
+              {dark ? "☀ LIGHT" : "☾ DARK"}
+            </button>
           </div>
         </div>
         <div style={{ display: "flex" }}>
@@ -722,14 +743,14 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 640, margin: "0 auto", padding: "6px 12px 24px" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: "6px 12px 24px" }}>
         {tab === "regime"     && <RegimeTab cycle={cycle} live={live} onSelectFactor={setSelectedFactor} />}
         {tab === "sentiment"  && <SentimentTab live={live} />}
         {tab === "valuations" && <ValuationsTab live={live} />}
       </div>
 
       <div style={{ borderTop: `1px solid ${C.border}`, padding: "12px 16px", textAlign: "center" }}>
-        <div style={{ maxWidth: 640, margin: "0 auto" }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
           <div style={{ fontSize: 9, fontFamily: SANS, color: C.dim, lineHeight: 2 }}>
             For illustrative purposes only · Not financial advice<br />
             Sources: FRED · BLS · BEA · Yahoo Finance · CNN · AAII · CBOE
