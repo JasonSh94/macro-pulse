@@ -391,7 +391,7 @@ function CycleQuadrant({ cycle }) {
   return (
     <Card>
       <div style={{ display: "flex", gap: 48, alignItems: "center" }}>
-        <div style={{ flex: "0 0 520px" }}>
+        <div style={{ flex: "0 0 1040px" }}>
           <svg viewBox="0 0 100 100" width="100%" style={{ display: "block" }}>
             <rect x="0" y="0" width="50" height="50" fill={C.red    + "0f"} />
             <rect x="50" y="0" width="50" height="50" fill={C.amber  + "0a"} />
@@ -457,9 +457,7 @@ function CycleQuadrant({ cycle }) {
 
 // ── FACTOR SCORECARD ───────────────────────────────────────────────────────────
 function FactorCard({ quadrant, onSelectFactor }) {
-  const [exp, setExp] = useState(false);
   const all = [...STYLE_FACTORS, ...MACRO_FACTORS];
-  const show = exp ? all : all.filter(f => fsig(f, quadrant) !== "warn").slice(0, 8);
   return (
     <Card>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
@@ -473,7 +471,7 @@ function FactorCard({ quadrant, onSelectFactor }) {
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 5 }}>
-        {show.map(f => {
+        {all.map(f => {
           const sig = fsig(f, quadrant); const col = sigCol(sig);
           return (
             <div key={f.id} onClick={() => onSelectFactor(f)}
@@ -495,9 +493,6 @@ function FactorCard({ quadrant, onSelectFactor }) {
             ))}
           </div>
         ))}
-        <button onClick={() => setExp(v => !v)} style={{ background: "none", border: "none", color: C.muted, cursor: "pointer", fontSize: 16, fontFamily: BOLD, fontWeight: 700, padding: 0 }}>
-          {exp ? "LESS ▲" : `ALL ${all.length} ▼`}
-        </button>
       </div>
       <div style={{ marginTop: 8, fontSize: 16, fontFamily: SANS, color: C.dim, textAlign: "center" }}>Tap any factor for detail & representative names</div>
     </Card>
@@ -707,7 +702,7 @@ export default function App() {
 
       {/* HEADER */}
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, zIndex: 100 }}>
-        <div style={{ maxWidth: 1600, margin: "0 auto", padding: "12px 16px 0" }}>
+        <div style={{ maxWidth: 1900, margin: "0 auto", padding: "12px 16px 0" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
           <span style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 32, letterSpacing: "-0.02em" }}>Macro Pulse</span>
           <div style={{ textAlign: "right" }}>
@@ -742,14 +737,14 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1600, margin: "0 auto", padding: "6px 12px 24px" }}>
+      <div style={{ maxWidth: 1900, margin: "0 auto", padding: "6px 12px 24px" }}>
         {tab === "regime"     && <RegimeTab cycle={cycle} live={live} onSelectFactor={setSelectedFactor} />}
         {tab === "sentiment"  && <SentimentTab live={live} />}
         {tab === "valuations" && <ValuationsTab live={live} />}
       </div>
 
       <div style={{ borderTop: `1px solid ${C.border}`, padding: "12px 16px", textAlign: "center" }}>
-        <div style={{ maxWidth: 1600, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1900, margin: "0 auto" }}>
           <div style={{ fontSize: 16, fontFamily: SANS, color: C.dim, lineHeight: 2 }}>
             For illustrative purposes only · Not financial advice<br />
             Sources: FRED · BLS · BEA · Yahoo Finance · CNN · AAII · CBOE
