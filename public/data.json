@@ -1,5 +1,5 @@
 {
-  "vix_latest": 23.87,
+  "vix_latest": 24.52,
   "vix_prev": null,
   "equity_flows_4w": null,
   "aaii_bull_bear": null,
@@ -24,13 +24,13 @@
   "hy_spread_prev": 3.16,
   "sp500_latest": 6582.6899,
   "sp500_chg_pct": 0.11,
-  "dxy_latest": 100.028,
-  "dxy_chg_pct": -0.0,
-  "gold_latest": 4654.3999,
-  "wti_latest": 111.75,
-  "wti_chg_pct": 0.19,
-  "btc_latest": 69204.8516,
-  "btc_chg_pct": 2.84,
+  "dxy_latest": 99.878,
+  "dxy_chg_pct": -0.15,
+  "gold_latest": 4724.5,
+  "wti_latest": 109.31,
+  "wti_chg_pct": -2.0,
+  "btc_latest": 69443.6562,
+  "btc_chg_pct": 0.67,
   "copper_gold_ratio": 0.0012,
   "sp500_fwd_pe": null,
   "equity_risk_premium": null,
@@ -11102,6 +11102,6 @@
     "quadrant": "stagflation",
     "confidence": 0
   },
-  "last_updated": "2026-04-06T02:16:19.618964Z",
+  "last_updated": "2026-04-06T09:14:38.585412Z",
   "data_note": "Live data from FRED API and Yahoo Finance. Some metrics (ISM, AAII, Put/Call, NAAIM, margin debt) are pending scraper implementation and fall back to hardcoded demo values."
 }
