@@ -253,12 +253,12 @@ function Tip({ text, children }) {
 }
 
 function Card({ children, style, onClick }) {
-  return <div onClick={onClick} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: 14, ...style }}>{children}</div>;
+  return <div onClick={onClick} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: 10, ...style }}>{children}</div>;
 }
 
 function SecLabel({ children }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "18px 0 10px" }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "10px 0 6px" }}>
       <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.18em", color: C.muted, whiteSpace: "nowrap" }}>{children}</span>
       <div style={{ flex: 1, height: 1, background: C.border }} />
     </div>
@@ -383,7 +383,7 @@ function CycleQuadrant({ cycle }) {
   ];
   return (
     <Card>
-      <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
         <div style={{ flex: "0 0 155px" }}>
           <svg viewBox="0 0 100 100" width="100%" style={{ display: "block" }}>
             <rect x="0" y="0" width="50" height="50" fill={C.red    + "0f"} />
@@ -444,7 +444,7 @@ function CycleQuadrant({ cycle }) {
           </div>
         </div>
       </div>
-      <div style={{ marginTop: 12, paddingTop: 12, borderTop: `1px solid ${C.border}`, fontSize: 12, lineHeight: 1.7, color: C.muted, fontFamily: SANS, fontStyle: "italic" }}>
+      <div style={{ marginTop: 8, paddingTop: 8, borderTop: `1px solid ${C.border}`, fontSize: 12, lineHeight: 1.5, color: C.muted, fontFamily: SANS, fontStyle: "italic" }}>
         "{Q.narrative ?? "Systematic signals are updating…"}"
       </div>
     </Card>
@@ -723,7 +723,7 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ padding: "14px 14px 40px" }}>
+      <div style={{ padding: "6px 12px 24px" }}>
         {tab === "regime"     && <RegimeTab cycle={cycle} live={live} onSelectFactor={setSelectedFactor} />}
         {tab === "sentiment"  && <SentimentTab live={live} />}
         {tab === "valuations" && <ValuationsTab live={live} />}
