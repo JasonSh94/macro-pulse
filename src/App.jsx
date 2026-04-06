@@ -281,13 +281,16 @@ function Takeaway({ text }) {
   );
 }
 
-function Tile({ label, value, prev, signal, tip, isLive }) {
+function Tile({ label, value, prev, signal, tip, isLive, liveDate }) {
   return (
     <Tip text={tip}>
       <Card style={{ cursor: "help" }}>
         <div style={{ fontSize: 16, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted, marginBottom: 6 }}>
           {label} <span style={{ color: C.dim, fontWeight: 400 }}>ⓘ</span>
-          {isLive && <span style={{ float: "right", fontSize: 12, color: C.green, fontFamily: BOLD, fontWeight: 700 }}>LIVE</span>}
+          {isLive && <span style={{ float: "right", textAlign: "right", lineHeight: 1.3 }}>
+            <span style={{ display: "block", fontSize: 12, color: C.green, fontFamily: BOLD, fontWeight: 700 }}>LIVE</span>
+            {liveDate && <span style={{ display: "block", fontSize: 11, color: C.dim, fontFamily: MONO }}>{liveDate}</span>}
+          </span>}
         </div>
         <div style={{ fontSize: 34, fontFamily: BOLD, fontWeight: 800, color: sigCol(signal), lineHeight: 1 }}>{value}</div>
         <div style={{ fontSize: 16, fontFamily: SANS, color: C.muted, marginTop: 5 }}>prev {prev}</div>
@@ -504,6 +507,7 @@ function FactorCard({ quadrant, onSelectFactor }) {
 function SentimentTab({ live }) {
   const L = live;
   const isLive = f => !!L && L[f] != null;
+  const liveDate = L?.last_updated ? (() => { const d = new Date(L.last_updated); return `${String(d.getUTCMonth()+1).padStart(2,'0')}/${String(d.getUTCFullYear()).slice(-2)}`; })() : null;
 
   const tiles = [
     { label: "VIX",            value: resolve(L?.vix_latest,  "24.3", v => v.toFixed(1)), prev: resolve(L?.vix_prev, "19.1", v => v.toFixed(1)), signal: L?.vix_latest != null ? (L.vix_latest > 30 ? "bad" : L.vix_latest > 20 ? "warn" : "good") : "warn", tip: "Options-implied fear gauge. >30 = panic, <15 = complacency. Elevated — markets pricing near-term uncertainty without full panic.", live: isLive("vix_latest") },
@@ -518,7 +522,7 @@ function SentimentTab({ live }) {
   return <>
     <Takeaway text="Sentiment deteriorated sharply across retail and institutional measures. Readings at these levels have preceded recoveries historically — but typically only after credit spreads peak and forced selling clears." />
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-      {tiles.map((m, i) => <Tile key={i} {...m} isLive={m.live} />)}
+      {tiles.map((m, i) => <Tile key={i} {...m} isLive={m.live} liveDate={liveDate} />)}
     </div>
   </>;
 }
@@ -526,6 +530,7 @@ function SentimentTab({ live }) {
 function ValuationsTab({ live }) {
   const L = live;
   const isLive = f => !!L && L[f] != null;
+  const liveDate = L?.last_updated ? (() => { const d = new Date(L.last_updated); return `${String(d.getUTCMonth()+1).padStart(2,'0')}/${String(d.getUTCFullYear()).slice(-2)}`; })() : null;
 
   const tiles = [
     { label: "S&P Fwd P/E",    value: resolve(L?.sp500_fwd_pe,    "21.4×", v => `${v.toFixed(1)}×`), prev: "19.8×",   signal: "bad",  tip: "Price / next 12-month earnings. At 21.4× vs 18.5× hist avg — expensive with real yields at 2%+.",          live: isLive("sp500_fwd_pe") },
@@ -559,7 +564,7 @@ function ValuationsTab({ live }) {
   return <>
     <Takeaway text="Equity risk premium near a two-decade low relative to real yields. Credit spreads widening confirms risk repricing underway. Valuations compressing but not yet at distressed entry levels across the stack." />
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 4 }}>
-      {tiles.map((m, i) => <Tile key={i} {...m} isLive={m.live} />)}
+      {tiles.map((m, i) => <Tile key={i} {...m} isLive={m.live} liveDate={liveDate} />)}
     </div>
     <SecLabel>YIELD STACK & CREDIT</SecLabel>
     <Card style={{ marginBottom: 4 }}>
@@ -602,6 +607,7 @@ function ValuationsTab({ live }) {
 function FundamentalsTab({ live }) {
   const L = live;
   const isLive = f => !!L && L[f] != null;
+  const liveDate = L?.last_updated ? (() => { const d = new Date(L.last_updated); return `${String(d.getUTCMonth()+1).padStart(2,'0')}/${String(d.getUTCFullYear()).slice(-2)}`; })() : null;
 
   const tiles = [
     { label: "GDP QoQ",          value: resolve(L?.gdp_qoq_latest,"+1.8%",v=>`${v>0?"+":""}${v.toFixed(1)}%`), prev: resolve(L?.gdp_qoq_prev,"+2.4%",v=>`${v>0?"+":""}${v.toFixed(1)}%`), signal:"warn", tip:"Latest quarter annualized. Decelerating — consumption slowing, investment soft, government spending propping headline.", live:isLive("gdp_qoq_latest") },
@@ -619,7 +625,7 @@ function FundamentalsTab({ live }) {
   return <>
     <Takeaway text="GDP holding up via government spending but private demand is softening. Inflation re-accelerating in services keeps the Fed on hold. Leading indicators point to further deceleration over the next 2–3 quarters." />
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 4 }}>
-      {tiles.map((m, i) => <Tile key={i} {...m} isLive={m.live} />)}
+      {tiles.map((m, i) => <Tile key={i} {...m} isLive={m.live} liveDate={liveDate} />)}
     </div>
     <SecLabel>GDP BY COMPONENT (QoQ, pp)</SecLabel>
     <Card style={{ marginBottom: 4 }}>
