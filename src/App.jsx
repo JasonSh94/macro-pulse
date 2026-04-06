@@ -32,8 +32,8 @@ let C = { ...DARK_C };
 const BOLD = "'Bricolage Grotesque', system-ui, sans-serif";
 const SANS = "'IBM Plex Sans', system-ui, sans-serif";
 const MONO = "'IBM Plex Mono', monospace"; // chart axes + table numerics only
-let AXIS_TICK = { fontSize: 9, fill: C.muted, fontFamily: MONO };
-let TT_STYLE  = { backgroundColor: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 6, fontSize: 11, fontFamily: SANS, color: C.text };
+let AXIS_TICK = { fontSize: 13, fill: C.muted, fontFamily: MONO };
+let TT_STYLE  = { backgroundColor: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 6, fontSize: 15, fontFamily: SANS, color: C.text };
 
 // ── LIVE DATA HOOK ────────────────────────────────────────────────────────────
 /**
@@ -250,8 +250,8 @@ function Tip({ text, children }) {
     <span ref={ref} style={{ position: "relative", display: "inline-block" }}>
       <span onClick={() => setOpen(v => !v)} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} style={{ cursor: "help" }}>{children}</span>
       {open && (
-        <span style={{ position: "absolute", bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)", minWidth: 240, maxWidth: 300, background: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 8, padding: "11px 13px", fontSize: 12, lineHeight: 1.6, color: C.text, fontFamily: SANS, zIndex: 9999, boxShadow: "0 12px 40px rgba(0,0,0,0.7)", whiteSpace: "normal", pointerEvents: "none" }}>
-          <span style={{ color: C.amber, fontWeight: 700, fontSize: 9, fontFamily: BOLD, letterSpacing: "0.12em", display: "block", marginBottom: 5 }}>SO WHAT?</span>
+        <span style={{ position: "absolute", bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)", minWidth: 240, maxWidth: 300, background: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 8, padding: "11px 13px", fontSize: 16, lineHeight: 1.6, color: C.text, fontFamily: SANS, zIndex: 9999, boxShadow: "0 12px 40px rgba(0,0,0,0.7)", whiteSpace: "normal", pointerEvents: "none" }}>
+          <span style={{ color: C.amber, fontWeight: 700, fontSize: 13, fontFamily: BOLD, letterSpacing: "0.12em", display: "block", marginBottom: 5 }}>SO WHAT?</span>
           {text}
         </span>
       )}
@@ -266,7 +266,7 @@ function Card({ children, style, onClick }) {
 function SecLabel({ children }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "10px 0 6px" }}>
-      <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.18em", color: C.muted, whiteSpace: "nowrap" }}>{children}</span>
+      <span style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.18em", color: C.muted, whiteSpace: "nowrap" }}>{children}</span>
       <div style={{ flex: 1, height: 1, background: C.border }} />
     </div>
   );
@@ -274,8 +274,8 @@ function SecLabel({ children }) {
 
 function Takeaway({ text }) {
   return (
-    <div style={{ borderLeft: `2px solid ${C.amber}`, background: `linear-gradient(90deg,${C.amberDim},transparent)`, borderRadius: "0 6px 6px 0", padding: "9px 13px", marginBottom: 12, fontSize: 12, lineHeight: 1.65, color: C.muted, fontFamily: SANS }}>
-      <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: C.amber, letterSpacing: "0.12em", display: "block", marginBottom: 3 }}>▸ TAKEAWAY</span>
+    <div style={{ borderLeft: `2px solid ${C.amber}`, background: `linear-gradient(90deg,${C.amberDim},transparent)`, borderRadius: "0 6px 6px 0", padding: "9px 13px", marginBottom: 12, fontSize: 16, lineHeight: 1.65, color: C.muted, fontFamily: SANS }}>
+      <span style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, color: C.amber, letterSpacing: "0.12em", display: "block", marginBottom: 3 }}>▸ TAKEAWAY</span>
       {text}
     </div>
   );
@@ -285,12 +285,12 @@ function Tile({ label, value, prev, signal, tip, isLive }) {
   return (
     <Tip text={tip}>
       <Card style={{ cursor: "help" }}>
-        <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted, marginBottom: 6 }}>
+        <div style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted, marginBottom: 6 }}>
           {label} <span style={{ color: C.dim, fontWeight: 400 }}>ⓘ</span>
-          {isLive && <span style={{ float: "right", fontSize: 7, color: C.green, fontFamily: BOLD, fontWeight: 700 }}>LIVE</span>}
+          {isLive && <span style={{ float: "right", fontSize: 10, color: C.green, fontFamily: BOLD, fontWeight: 700 }}>LIVE</span>}
         </div>
-        <div style={{ fontSize: 21, fontFamily: BOLD, fontWeight: 800, color: sigCol(signal), lineHeight: 1 }}>{value}</div>
-        <div style={{ fontSize: 9, fontFamily: SANS, color: C.muted, marginTop: 5 }}>prev {prev}</div>
+        <div style={{ fontSize: 27, fontFamily: BOLD, fontWeight: 800, color: sigCol(signal), lineHeight: 1 }}>{value}</div>
+        <div style={{ fontSize: 13, fontFamily: SANS, color: C.muted, marginTop: 5 }}>prev {prev}</div>
       </Card>
     </Tip>
   );
@@ -300,7 +300,7 @@ function Legend({ items }) {
   return (
     <div style={{ display: "flex", gap: 12, marginTop: 8, flexWrap: "wrap" }}>
       {items.map(([l, c]) => (
-        <span key={l} style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: C.muted, display: "flex", alignItems: "center", gap: 4 }}>
+        <span key={l} style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, color: C.muted, display: "flex", alignItems: "center", gap: 4 }}>
           <span style={{ width: 10, height: 2, background: c, display: "inline-block" }} />{l}
         </span>
       ))}
@@ -312,7 +312,7 @@ function BoxLegend({ items }) {
   return (
     <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 10 }}>
       {items.map(([l, c]) => (
-        <span key={l} style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: C.muted, display: "flex", alignItems: "center", gap: 4 }}>
+        <span key={l} style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, color: C.muted, display: "flex", alignItems: "center", gap: 4 }}>
           <span style={{ width: 7, height: 7, borderRadius: 2, background: c, display: "inline-block" }} />{l}
         </span>
       ))}
@@ -338,32 +338,32 @@ function FactorModal({ factor, quadrant, onClose }) {
         <div style={{ width: 36, height: 4, background: C.dim, borderRadius: 2, margin: "0 auto 20px" }} />
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
           <div>
-            <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted, marginBottom: 4 }}>{isStyle ? "STYLE FACTOR" : "MACRO FACTOR"}</div>
-            <div style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 24, color: C.text, lineHeight: 1, letterSpacing: "-0.01em" }}>{factor.label}</div>
+            <div style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted, marginBottom: 4 }}>{isStyle ? "STYLE FACTOR" : "MACRO FACTOR"}</div>
+            <div style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 30, color: C.text, lineHeight: 1, letterSpacing: "-0.01em" }}>{factor.label}</div>
           </div>
           <div style={{ textAlign: "right" }}>
-            <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.12em", color: C.muted, marginBottom: 4 }}>REGIME SIGNAL</div>
-            <div style={{ display: "inline-block", padding: "4px 10px", borderRadius: 5, background: sigBg(sig), border: `1px solid ${col}40`, fontSize: 10, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.08em", color: col }}>{sigLabel(sig)}</div>
+            <div style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.12em", color: C.muted, marginBottom: 4 }}>REGIME SIGNAL</div>
+            <div style={{ display: "inline-block", padding: "4px 10px", borderRadius: 5, background: sigBg(sig), border: `1px solid ${col}40`, fontSize: 14, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.08em", color: col }}>{sigLabel(sig)}</div>
           </div>
         </div>
-        <div style={{ fontSize: 12.5, lineHeight: 1.7, color: C.muted, fontFamily: SANS, marginBottom: 18, paddingBottom: 18, borderBottom: `1px solid ${C.border}` }}>{factor.tip}</div>
+        <div style={{ fontSize: 16.5, lineHeight: 1.7, color: C.muted, fontFamily: SANS, marginBottom: 18, paddingBottom: 18, borderBottom: `1px solid ${C.border}` }}>{factor.tip}</div>
         {data && <>
-          <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted, marginBottom: 10 }}>REPRESENTATIVE NAMES · {data.stat.toUpperCase()}</div>
+          <div style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted, marginBottom: 10 }}>REPRESENTATIVE NAMES · {data.stat.toUpperCase()}</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {data.stocks.map((s, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "9px 12px", background: C.card, borderRadius: 8, border: `1px solid ${C.border}` }}>
-                <div style={{ width: 22, height: 22, borderRadius: 5, background: col + "20", border: `1px solid ${col}35`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: col, flexShrink: 0 }}>{i + 1}</div>
+                <div style={{ width: 22, height: 22, borderRadius: 5, background: col + "20", border: `1px solid ${col}35`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontFamily: BOLD, fontWeight: 700, color: col, flexShrink: 0 }}>{i + 1}</div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 12, fontFamily: BOLD, fontWeight: 700, color: C.text }}>{s.t}</div>
-                  <div style={{ fontSize: 10, color: C.muted, fontFamily: SANS, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.n}</div>
+                  <div style={{ fontSize: 16, fontFamily: BOLD, fontWeight: 700, color: C.text }}>{s.t}</div>
+                  <div style={{ fontSize: 14, color: C.muted, fontFamily: SANS, marginTop: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.n}</div>
                 </div>
-                <div style={{ fontSize: 12, fontFamily: BOLD, fontWeight: 700, color: col, flexShrink: 0 }}>{s.v}</div>
+                <div style={{ fontSize: 16, fontFamily: BOLD, fontWeight: 700, color: col, flexShrink: 0 }}>{s.v}</div>
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 12, fontSize: 9, fontFamily: SANS, color: C.dim, textAlign: "center" }}>Illustrative only · Demo data · Not a recommendation</div>
+          <div style={{ marginTop: 12, fontSize: 13, fontFamily: SANS, color: C.dim, textAlign: "center" }}>Illustrative only · Demo data · Not a recommendation</div>
         </>}
-        <button onClick={onClose} style={{ marginTop: 16, width: "100%", padding: "12px", background: "none", border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 10, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted, cursor: "pointer" }}>CLOSE</button>
+        <button onClick={onClose} style={{ marginTop: 16, width: "100%", padding: "12px", background: "none", border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 14, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted, cursor: "pointer" }}>CLOSE</button>
       </div>
     </div>
   );
@@ -391,7 +391,7 @@ function CycleQuadrant({ cycle }) {
   return (
     <Card>
       <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-        <div style={{ flex: "0 0 260px" }}>
+        <div style={{ flex: "0 0 380px" }}>
           <svg viewBox="0 0 100 100" width="100%" style={{ display: "block" }}>
             <rect x="0" y="0" width="50" height="50" fill={C.red    + "0f"} />
             <rect x="50" y="0" width="50" height="50" fill={C.amber  + "0a"} />
@@ -414,13 +414,13 @@ function CycleQuadrant({ cycle }) {
           </svg>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted, marginBottom: 4 }}>CURRENT REGIME</div>
-          <div style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 21, color: Q.color, lineHeight: 1.1, marginBottom: 2, letterSpacing: "-0.01em" }}>{Q.label}</div>
-          <div style={{ fontSize: 10, fontFamily: SANS, color: C.muted, marginBottom: 12 }}>{Q.sub}</div>
+          <div style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted, marginBottom: 4 }}>CURRENT REGIME</div>
+          <div style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 27, color: Q.color, lineHeight: 1.1, marginBottom: 2, letterSpacing: "-0.01em" }}>{Q.label}</div>
+          <div style={{ fontSize: 14, fontFamily: SANS, color: C.muted, marginBottom: 12 }}>{Q.sub}</div>
           <div style={{ marginBottom: 12, maxWidth: 260 }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-              <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted }}>SIGNAL CONFIDENCE</span>
-              <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: Q.color }}>{cycle.confidence}%</span>
+              <span style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted }}>SIGNAL CONFIDENCE</span>
+              <span style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, color: Q.color }}>{cycle.confidence}%</span>
             </div>
             <div style={{ height: 3, background: C.border, borderRadius: 2 }}>
               <div style={{ height: "100%", width: `${cycle.confidence}%`, background: Q.color, borderRadius: 2 }} />
@@ -429,18 +429,18 @@ function CycleQuadrant({ cycle }) {
           <div ref={altsRef} style={{ position: "relative", display: "inline-block" }}>
             <div onClick={() => setAltsOpen(v => !v)} onMouseEnter={() => setAltsOpen(true)} onMouseLeave={() => setAltsOpen(false)}
               style={{ display: "inline-flex", alignItems: "center", gap: 7, background: Q.color + "18", border: `1px solid ${Q.color}35`, borderRadius: 5, padding: "5px 11px", cursor: "help" }}>
-              <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted }}>ALTS BUCKET</span>
-              <span style={{ fontSize: 11, fontFamily: BOLD, fontWeight: 800, color: Q.color }}>{Q.alts}</span>
-              <span style={{ fontSize: 9, color: C.dim }}>ⓘ</span>
+              <span style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted }}>ALTS BUCKET</span>
+              <span style={{ fontSize: 15, fontFamily: BOLD, fontWeight: 800, color: Q.color }}>{Q.alts}</span>
+              <span style={{ fontSize: 13, color: C.dim }}>ⓘ</span>
             </div>
             {altsOpen && (
               <div style={{ position: "absolute", bottom: "calc(100% + 8px)", left: 0, width: 280, background: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 10, padding: "13px 14px", zIndex: 500, boxShadow: "0 12px 40px rgba(0,0,0,0.8)", pointerEvents: "none" }}>
-                <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.12em", color: Q.color, marginBottom: 6 }}>ALTS → {Q.alts.toUpperCase()}</div>
-                <div style={{ fontSize: 12, lineHeight: 1.65, color: C.muted, fontFamily: SANS, marginBottom: 12 }}>{Q.altsDesc}</div>
+                <div style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.12em", color: Q.color, marginBottom: 6 }}>ALTS → {Q.alts.toUpperCase()}</div>
+                <div style={{ fontSize: 16, lineHeight: 1.65, color: C.muted, fontFamily: SANS, marginBottom: 12 }}>{Q.altsDesc}</div>
                 <div style={{ paddingTop: 10, borderTop: `1px solid ${C.border}` }}>
-                  <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted, marginBottom: 6 }}>ALL REGIME MAPPINGS</div>
+                  <div style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em", color: C.muted, marginBottom: 6 }}>ALL REGIME MAPPINGS</div>
                   {Object.entries(QUADRANTS).map(([k, v]) => (
-                    <div key={k} style={{ display: "flex", justifyContent: "space-between", fontSize: 10, fontFamily: SANS, padding: "3px 0" }}>
+                    <div key={k} style={{ display: "flex", justifyContent: "space-between", fontSize: 14, fontFamily: SANS, padding: "3px 0" }}>
                       <span style={{ color: k === cycle.quadrant ? v.color : C.dim }}>{k === cycle.quadrant ? "▸ " : "  "}{v.label}</span>
                       <span style={{ color: k === cycle.quadrant ? v.color : C.dim, fontFamily: BOLD, fontWeight: 700 }}>{v.alts}</span>
                     </div>
@@ -463,10 +463,10 @@ function FactorCard({ quadrant, onSelectFactor }) {
   return (
     <Card>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-        <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted }}>FACTOR REGIME SIGNALS</span>
+        <span style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em", color: C.muted }}>FACTOR REGIME SIGNALS</span>
         <div style={{ display: "flex", gap: 10 }}>
           {[["FAVORED","good"],["NEUTRAL","warn"],["AVOID","bad"]].map(([l,s]) => (
-            <span key={s} style={{ fontSize: 8, fontFamily: BOLD, fontWeight: 700, color: sigCol(s), display: "flex", alignItems: "center", gap: 3 }}>
+            <span key={s} style={{ fontSize: 11, fontFamily: BOLD, fontWeight: 700, color: sigCol(s), display: "flex", alignItems: "center", gap: 3 }}>
               <span style={{ width: 5, height: 5, borderRadius: "50%", background: sigCol(s), display: "inline-block" }} />{l}
             </span>
           ))}
@@ -481,7 +481,7 @@ function FactorCard({ quadrant, onSelectFactor }) {
               onMouseEnter={e => { e.currentTarget.style.borderColor = col+"55"; e.currentTarget.style.transform = "scale(1.04)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = col+"22"; e.currentTarget.style.transform = "scale(1)"; }}>
               <div style={{ width: 5, height: 5, borderRadius: "50%", background: col, margin: "0 auto 5px" }} />
-              <div style={{ fontSize: 8.5, fontFamily: BOLD, fontWeight: 700, color: C.muted, lineHeight: 1.3 }}>{f.label}</div>
+              <div style={{ fontSize: 11.5, fontFamily: BOLD, fontWeight: 700, color: C.muted, lineHeight: 1.3 }}>{f.label}</div>
             </div>
           );
         })}
@@ -489,17 +489,17 @@ function FactorCard({ quadrant, onSelectFactor }) {
       <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8, paddingTop: 8, borderTop: `1px solid ${C.border}` }}>
         {[["STYLE", STYLE_FACTORS],["MACRO", MACRO_FACTORS]].map(([lbl, arr]) => (
           <div key={lbl} style={{ display: "flex", gap: 6 }}>
-            <span style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: C.dim }}>{lbl}:</span>
+            <span style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, color: C.dim }}>{lbl}:</span>
             {[["good","▲"],["warn","–"],["bad","▼"]].map(([s,sym]) => (
-              <span key={s} style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: sigCol(s) }}>{arr.filter(f => fsig(f, quadrant) === s).length}{sym}</span>
+              <span key={s} style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, color: sigCol(s) }}>{arr.filter(f => fsig(f, quadrant) === s).length}{sym}</span>
             ))}
           </div>
         ))}
-        <button onClick={() => setExp(v => !v)} style={{ background: "none", border: "none", color: C.muted, cursor: "pointer", fontSize: 9, fontFamily: BOLD, fontWeight: 700, padding: 0 }}>
+        <button onClick={() => setExp(v => !v)} style={{ background: "none", border: "none", color: C.muted, cursor: "pointer", fontSize: 13, fontFamily: BOLD, fontWeight: 700, padding: 0 }}>
           {exp ? "LESS ▲" : `ALL ${all.length} ▼`}
         </button>
       </div>
-      <div style={{ marginTop: 8, fontSize: 9, fontFamily: SANS, color: C.dim, textAlign: "center" }}>Tap any factor for detail & representative names</div>
+      <div style={{ marginTop: 8, fontSize: 13, fontFamily: SANS, color: C.dim, textAlign: "center" }}>Tap any factor for detail & representative names</div>
     </Card>
   );
 }
@@ -586,15 +586,15 @@ function ValuationsTab({ live }) {
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead><tr>{["REGION","GDP%","CPI%","RATE","10Y"].map(h => (
-            <th key={h} style={{ textAlign: "left", color: C.muted, fontWeight: 700, paddingBottom: 8, paddingRight: 10, fontSize: 9, fontFamily: BOLD, letterSpacing: "0.1em" }}>{h}</th>
+            <th key={h} style={{ textAlign: "left", color: C.muted, fontWeight: 700, paddingBottom: 8, paddingRight: 10, fontSize: 13, fontFamily: BOLD, letterSpacing: "0.1em" }}>{h}</th>
           ))}</tr></thead>
           <tbody>{GLOBAL_DEMO.map((row, i) => (
             <tr key={i} style={{ borderTop: `1px solid ${C.border}` }}>
-              <td style={{ padding: "8px 10px 8px 0", color: C.text, fontFamily: SANS, fontSize: 11, whiteSpace: "nowrap" }}>{row.r}</td>
-              <td style={{ padding: "8px 10px 8px 0", color: row.gdp > 1 ? C.green : C.amber, fontFamily: MONO, fontSize: 11 }}>{row.gdp}%</td>
-              <td style={{ padding: "8px 10px 8px 0", color: row.cpi > 3 ? C.red : C.amber, fontFamily: MONO, fontSize: 11 }}>{row.cpi}%</td>
-              <td style={{ padding: "8px 10px 8px 0", color: C.muted, fontFamily: MONO, fontSize: 11 }}>{row.rate}%</td>
-              <td style={{ padding: "8px 0", color: C.muted, fontFamily: MONO, fontSize: 11 }}>{row.y10}%</td>
+              <td style={{ padding: "8px 10px 8px 0", color: C.text, fontFamily: SANS, fontSize: 15, whiteSpace: "nowrap" }}>{row.r}</td>
+              <td style={{ padding: "8px 10px 8px 0", color: row.gdp > 1 ? C.green : C.amber, fontFamily: MONO, fontSize: 15 }}>{row.gdp}%</td>
+              <td style={{ padding: "8px 10px 8px 0", color: row.cpi > 3 ? C.red : C.amber, fontFamily: MONO, fontSize: 15 }}>{row.cpi}%</td>
+              <td style={{ padding: "8px 10px 8px 0", color: C.muted, fontFamily: MONO, fontSize: 15 }}>{row.rate}%</td>
+              <td style={{ padding: "8px 0", color: C.muted, fontFamily: MONO, fontSize: 15 }}>{row.y10}%</td>
             </tr>
           ))}</tbody>
         </table>
@@ -678,13 +678,13 @@ function RegimeTab({ cycle, live, onSelectFactor }) {
 export default function App() {
   const [tab, setTab] = useState("regime");
   const [selectedFactor, setSelectedFactor] = useState(null);
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const { live, status } = useLiveData();
 
   // Sync theme palette before any render
   C = dark ? DARK_C : LIGHT_C;
-  AXIS_TICK = { fontSize: 9, fill: C.muted, fontFamily: MONO };
-  TT_STYLE  = { backgroundColor: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 6, fontSize: 11, fontFamily: SANS, color: C.text };
+  AXIS_TICK = { fontSize: 13, fill: C.muted, fontFamily: MONO };
+  TT_STYLE  = { backgroundColor: C.surface, border: `1px solid ${C.borderBright}`, borderRadius: 6, fontSize: 15, fontFamily: SANS, color: C.text };
 
   // Compute cycle from live data if available, else demo scores
   const cycle = (live && live.cycle)
@@ -707,21 +707,21 @@ export default function App() {
 
       {/* HEADER */}
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.border}`, position: "sticky", top: 0, zIndex: 100 }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "12px 16px 0" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto", padding: "12px 16px 0" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-          <span style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 20, letterSpacing: "-0.02em" }}>Macro Pulse</span>
+          <span style={{ fontFamily: BOLD, fontWeight: 800, fontSize: 26, letterSpacing: "-0.02em" }}>Macro Pulse</span>
           <div style={{ textAlign: "right" }}>
-            <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, color: C.muted }}>
+            <div style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, color: C.muted }}>
               {new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
             </div>
-            <div style={{ fontSize: 9, fontFamily: BOLD, fontWeight: 700, marginTop: 1,
+            <div style={{ fontSize: 13, fontFamily: BOLD, fontWeight: 700, marginTop: 1,
               color: status === "live" ? C.green : status === "demo" ? C.amber : C.dim }}>
               {status === "live" ? `● LIVE · ${lastUpdated}` : status === "demo" ? "● DEMO DATA" : "● LOADING…"}
             </div>
             <button onClick={() => setDark(v => !v)} style={{
               marginTop: 5, background: C.card, border: `1px solid ${C.border}`,
               borderRadius: 20, padding: "3px 9px", cursor: "pointer",
-              fontSize: 8, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em",
+              fontSize: 11, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.1em",
               color: C.muted, display: "inline-flex", alignItems: "center", gap: 4,
             }}>
               {dark ? "☀ LIGHT" : "☾ DARK"}
@@ -732,7 +732,7 @@ export default function App() {
           {TABS.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)} style={{
               background: "none", border: "none", padding: "7px 13px",
-              fontSize: 9, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em",
+              fontSize: 13, fontFamily: BOLD, fontWeight: 700, letterSpacing: "0.14em",
               color: tab === t.id ? C.amber : C.muted,
               borderBottom: `2px solid ${tab === t.id ? C.amber : "transparent"}`,
               cursor: "pointer", transition: "all 0.15s",
@@ -742,15 +742,15 @@ export default function App() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "6px 12px 24px" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "6px 12px 24px" }}>
         {tab === "regime"     && <RegimeTab cycle={cycle} live={live} onSelectFactor={setSelectedFactor} />}
         {tab === "sentiment"  && <SentimentTab live={live} />}
         {tab === "valuations" && <ValuationsTab live={live} />}
       </div>
 
       <div style={{ borderTop: `1px solid ${C.border}`, padding: "12px 16px", textAlign: "center" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ fontSize: 9, fontFamily: SANS, color: C.dim, lineHeight: 2 }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <div style={{ fontSize: 13, fontFamily: SANS, color: C.dim, lineHeight: 2 }}>
             For illustrative purposes only · Not financial advice<br />
             Sources: FRED · BLS · BEA · Yahoo Finance · CNN · AAII · CBOE
           </div>
