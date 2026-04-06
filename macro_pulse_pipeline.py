@@ -395,7 +395,7 @@ def build_data():
     data["cpi_chart"] = {
         "shelter":    fred("CUSR0000SAH1",  start=TWO_YEARS_AGO),
         "supercore":  fred("CUSR0000SASLE", start=TWO_YEARS_AGO),  # services less shelter
-        "energy":     fred("CUSR0000SA0E",  start=TWO_YEARS_AGO),
+        "energy":     fred("CPIENGSL",       start=TWO_YEARS_AGO),
         "food":       fred("CUSR0000SAF",   start=TWO_YEARS_AGO),
         "goods":      fred("CUSR0000SACL1E",start=TWO_YEARS_AGO),  # commodities less food and energy
     }
