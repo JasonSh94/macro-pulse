@@ -1,49 +1,49 @@
 {
-  "vix_latest": 18.92,
-  "vix_prev": 21.51,
-  "fear_greed": 33.7,
-  "aaii_bull": 36.3,
-  "aaii_neutral": 26.7,
-  "aaii_bear": 37.0,
-  "aaii_spread": -0.7,
-  "put_call_ratio": 1.18,
+  "vix_latest": 22.22,
+  "vix_prev": 19.87,
+  "fear_greed": 27.2,
+  "aaii_bull": 30.4,
+  "aaii_neutral": 22.0,
+  "aaii_bear": 47.7,
+  "aaii_spread": -17.3,
+  "put_call_ratio": 1.1,
   "equity_flows_4w": null,
   "naaim_exposure": null,
   "money_market_aum_latest": 2.25,
   "money_market_aum_prev": 2.25,
   "margin_debt": null,
-  "yield_2y_latest": 4.15,
-  "yield_10y_latest": 4.56,
-  "yield_30y_latest": 5.03,
-  "yield_2y_prev": 4.17,
-  "yield_10y_prev": 4.55,
-  "yield_curve_spread": 0.41,
-  "real_yield_10y_latest": 2.21,
-  "real_yield_10y_prev": 2.19,
-  "breakeven_10y_latest": 2.33,
-  "breakeven_10y_prev": 2.35,
+  "yield_2y_latest": 4.13,
+  "yield_10y_latest": 4.53,
+  "yield_30y_latest": 5.01,
+  "yield_2y_prev": 4.15,
+  "yield_10y_prev": 4.56,
+  "yield_curve_spread": 0.4,
+  "real_yield_10y_latest": 2.2,
+  "real_yield_10y_prev": 2.21,
+  "breakeven_10y_latest": 2.34,
+  "breakeven_10y_prev": 2.33,
   "ig_spread_latest": 0.75,
-  "hy_spread_latest": 2.75,
-  "ig_spread_prev": 0.74,
-  "hy_spread_prev": 2.76,
-  "sp500_latest": NaN,
-  "sp500_chg_pct": NaN,
-  "dxy_latest": 99.961,
-  "dxy_chg_pct": -0.09,
-  "gold_latest": 4187.1001,
-  "wti_latest": 89.98,
-  "wti_chg_pct": 2.02,
-  "btc_latest": 60930.3086,
-  "btc_chg_pct": -1.16,
+  "hy_spread_latest": 2.78,
+  "ig_spread_prev": 0.75,
+  "hy_spread_prev": 2.75,
+  "sp500_latest": 7266.9902,
+  "sp500_chg_pct": -1.62,
+  "dxy_latest": 100.039,
+  "dxy_chg_pct": 0.09,
+  "gold_latest": 4104.2002,
+  "wti_latest": 89.09,
+  "wti_chg_pct": -1.04,
+  "btc_latest": 63116.7695,
+  "btc_chg_pct": 2.71,
   "copper_gold_ratio": 0.0015,
-  "sp500_fwd_pe": 26.4,
-  "equity_risk_premium": 1.58,
+  "sp500_fwd_pe": 26.0,
+  "equity_risk_premium": 1.65,
   "gdp_qoq_latest": 1.6,
   "gdp_qoq_prev": 0.5,
   "core_pce_latest": 3.29,
   "core_pce_prev": 3.24,
-  "cpi_latest": 3.95,
-  "cpi_prev": 3.32,
+  "cpi_latest": 4.27,
+  "cpi_prev": 3.95,
   "unemployment_latest": 4.3,
   "unemployment_prev": 4.3,
   "initial_claims_latest": 225000,
@@ -795,6 +795,10 @@
       {
         "date": "2026-04-01",
         "value": 426.642
+      },
+      {
+        "date": "2026-05-01",
+        "value": 427.998
       }
     ],
     "supercore": [
@@ -885,6 +889,10 @@
       {
         "date": "2026-04-01",
         "value": 443.154
+      },
+      {
+        "date": "2026-05-01",
+        "value": 444.46
       }
     ],
     "energy": [
@@ -975,6 +983,10 @@
       {
         "date": "2026-04-01",
         "value": 325.978
+      },
+      {
+        "date": "2026-05-01",
+        "value": 338.639
       }
     ],
     "food": [
@@ -1065,6 +1077,10 @@
       {
         "date": "2026-04-01",
         "value": 345.197
+      },
+      {
+        "date": "2026-05-01",
+        "value": 345.715
       }
     ],
     "goods": [
@@ -1155,15 +1171,15 @@
       {
         "date": "2026-04-01",
         "value": 167.767
+      },
+      {
+        "date": "2026-05-01",
+        "value": 167.575
       }
     ]
   },
   "yield_chart": {
     "y2": [
-      {
-        "date": "2024-06-10",
-        "value": 4.87
-      },
       {
         "date": "2024-06-11",
         "value": 4.81
@@ -3151,13 +3167,13 @@
       {
         "date": "2026-06-08",
         "value": 4.15
+      },
+      {
+        "date": "2026-06-09",
+        "value": 4.13
       }
     ],
     "y10": [
-      {
-        "date": "2024-06-10",
-        "value": 4.47
-      },
       {
         "date": "2024-06-11",
         "value": 4.39
@@ -5145,13 +5161,13 @@
       {
         "date": "2026-06-08",
         "value": 4.56
+      },
+      {
+        "date": "2026-06-09",
+        "value": 4.53
       }
     ],
     "real10": [
-      {
-        "date": "2024-06-10",
-        "value": 2.16
-      },
       {
         "date": "2024-06-11",
         "value": 2.12
@@ -7139,13 +7155,13 @@
       {
         "date": "2026-06-08",
         "value": 2.21
+      },
+      {
+        "date": "2026-06-09",
+        "value": 2.2
       }
     ],
     "hy": [
-      {
-        "date": "2024-06-10",
-        "value": 3.15
-      },
       {
         "date": "2024-06-11",
         "value": 3.19
@@ -9241,13 +9257,13 @@
       {
         "date": "2026-06-08",
         "value": 2.75
+      },
+      {
+        "date": "2026-06-09",
+        "value": 2.78
       }
     ],
     "ig": [
-      {
-        "date": "2024-06-10",
-        "value": 0.9
-      },
       {
         "date": "2024-06-11",
         "value": 0.91
@@ -11339,13 +11355,13 @@
       {
         "date": "2026-06-08",
         "value": 0.75
+      },
+      {
+        "date": "2026-06-09",
+        "value": 0.75
       }
     ],
     "be10": [
-      {
-        "date": "2024-06-10",
-        "value": 2.31
-      },
       {
         "date": "2024-06-11",
         "value": 2.27
@@ -13337,12 +13353,16 @@
       {
         "date": "2026-06-09",
         "value": 2.33
+      },
+      {
+        "date": "2026-06-10",
+        "value": 2.34
       }
     ]
   },
   "global": {
     "ecb_rate": {
-      "date": "2026-06-09",
+      "date": "2026-06-11",
       "value": 2.0
     },
     "boe_rate": null,
@@ -13351,21 +13371,21 @@
     "uk_cpi": null
   },
   "cycle": {
-    "growth": -0.161,
-    "inflation": 0.126,
+    "growth": -0.164,
+    "inflation": 0.128,
     "quadrant": "stagflation",
     "confidence": 11
   },
   "cycle_1y_ago": {
-    "growth": -0.17,
-    "inflation": 0.077,
+    "growth": -0.169,
+    "inflation": 0.079,
     "quadrant": "stagflation"
   },
   "cycle_2y_ago": {
-    "growth": -0.216,
+    "growth": -0.22,
     "inflation": 0.075,
     "quadrant": "stagflation"
   },
-  "last_updated": "2026-06-10T11:41:33.282785Z",
+  "last_updated": "2026-06-11T12:13:10.080582Z",
   "data_note": "Live data from FRED API and Yahoo Finance. Some metrics (ISM, AAII, Put/Call, NAAIM, margin debt) are pending scraper implementation and fall back to hardcoded demo values."
 }
