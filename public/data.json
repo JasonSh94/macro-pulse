@@ -1,6 +1,6 @@
 {
-  "vix_latest": 14.53,
-  "vix_prev": 14.32,
+  "vix_latest": 15.3,
+  "vix_prev": 14.53,
   "fear_greed": 41.9,
   "aaii_bull": 39.7,
   "aaii_neutral": 22.7,
@@ -28,13 +28,13 @@
   "hy_spread_prev": 2.66,
   "sp500_latest": 7718.6001,
   "sp500_chg_pct": -0.38,
-  "dxy_latest": 98.911,
-  "dxy_chg_pct": -0.25,
-  "gold_latest": 4476.6001,
-  "wti_latest": 91.48,
-  "wti_chg_pct": 0.0,
-  "btc_latest": 79311.2266,
-  "btc_chg_pct": -1.29,
+  "dxy_latest": 98.919,
+  "dxy_chg_pct": -0.24,
+  "gold_latest": 4448.8999,
+  "wti_latest": 93.46,
+  "wti_chg_pct": 2.16,
+  "btc_latest": 78322.1875,
+  "btc_chg_pct": -1.0,
   "copper_gold_ratio": 0.0015,
   "sp500_fwd_pe": 24.9,
   "equity_risk_premium": 1.6,
@@ -13294,7 +13294,7 @@
   },
   "global": {
     "ecb_rate": {
-      "date": "2026-09-07",
+      "date": "2026-09-08",
       "value": 2.25
     },
     "boe_rate": null,
@@ -13309,8 +13309,8 @@
     "confidence": 11
   },
   "cycle_1y_ago": {
-    "growth": -0.061,
-    "inflation": 0.132,
+    "growth": -0.063,
+    "inflation": 0.133,
     "quadrant": "stagflation"
   },
   "cycle_2y_ago": {
@@ -13318,6 +13318,6 @@
     "inflation": 0.103,
     "quadrant": "stagflation"
   },
-  "last_updated": "2026-09-07T14:06:07.644595Z",
+  "last_updated": "2026-09-08T12:42:54.538485Z",
   "data_note": "Live data from FRED API and Yahoo Finance. Some metrics (ISM, AAII, Put/Call, NAAIM, margin debt) are pending scraper implementation and fall back to hardcoded demo values."
 }
