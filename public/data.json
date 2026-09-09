@@ -1,43 +1,43 @@
 {
-  "vix_latest": 15.3,
-  "vix_prev": 14.53,
-  "fear_greed": 41.9,
+  "vix_latest": 15.72,
+  "vix_prev": 15.3,
+  "fear_greed": 39.5,
   "aaii_bull": 39.7,
   "aaii_neutral": 22.7,
   "aaii_bear": 37.6,
   "aaii_spread": 2.1,
-  "put_call_ratio": 1.31,
+  "put_call_ratio": 1.42,
   "equity_flows_4w": null,
   "naaim_exposure": null,
   "money_market_aum_latest": 3.01,
   "money_market_aum_prev": 3.02,
   "margin_debt": null,
-  "yield_2y_latest": 4.34,
-  "yield_10y_latest": 4.77,
-  "yield_30y_latest": 5.25,
-  "yield_2y_prev": 4.39,
-  "yield_10y_prev": 4.79,
-  "yield_curve_spread": 0.43,
-  "real_yield_10y_latest": 2.42,
-  "real_yield_10y_prev": 2.45,
-  "breakeven_10y_latest": 2.35,
+  "yield_2y_latest": 4.37,
+  "yield_10y_latest": 4.78,
+  "yield_30y_latest": 5.24,
+  "yield_2y_prev": 4.34,
+  "yield_10y_prev": 4.77,
+  "yield_curve_spread": 0.41,
+  "real_yield_10y_latest": 2.43,
+  "real_yield_10y_prev": 2.42,
+  "breakeven_10y_latest": 2.37,
   "breakeven_10y_prev": 2.35,
   "ig_spread_latest": 0.81,
-  "hy_spread_latest": 2.65,
+  "hy_spread_latest": 2.68,
   "ig_spread_prev": 0.81,
-  "hy_spread_prev": 2.66,
-  "sp500_latest": 7718.6001,
-  "sp500_chg_pct": -0.38,
-  "dxy_latest": 98.919,
-  "dxy_chg_pct": -0.24,
-  "gold_latest": 4448.8999,
-  "wti_latest": 93.46,
-  "wti_chg_pct": 2.16,
-  "btc_latest": 78322.1875,
-  "btc_chg_pct": -1.0,
+  "hy_spread_prev": 2.68,
+  "sp500_latest": 7673.52,
+  "sp500_chg_pct": -0.58,
+  "dxy_latest": 98.646,
+  "dxy_chg_pct": -0.2,
+  "gold_latest": 4436.8999,
+  "wti_latest": 95.83,
+  "wti_chg_pct": 3.01,
+  "btc_latest": 79554.9766,
+  "btc_chg_pct": 1.42,
   "copper_gold_ratio": 0.0015,
-  "sp500_fwd_pe": 24.9,
-  "equity_risk_premium": 1.6,
+  "sp500_fwd_pe": 24.7,
+  "equity_risk_premium": 1.62,
   "gdp_qoq_latest": 1.5,
   "gdp_qoq_prev": 2.1,
   "core_pce_latest": 3.34,
@@ -3147,6 +3147,10 @@
       {
         "date": "2026-09-03",
         "value": 4.34
+      },
+      {
+        "date": "2026-09-04",
+        "value": 4.37
       }
     ],
     "y10": [
@@ -5137,6 +5141,10 @@
       {
         "date": "2026-09-03",
         "value": 4.77
+      },
+      {
+        "date": "2026-09-04",
+        "value": 4.78
       }
     ],
     "real10": [
@@ -7127,6 +7135,10 @@
       {
         "date": "2026-09-03",
         "value": 2.42
+      },
+      {
+        "date": "2026-09-04",
+        "value": 2.43
       }
     ],
     "hy": [
@@ -9213,6 +9225,14 @@
       {
         "date": "2026-09-03",
         "value": 2.65
+      },
+      {
+        "date": "2026-09-04",
+        "value": 2.68
+      },
+      {
+        "date": "2026-09-07",
+        "value": 2.68
       }
     ],
     "ig": [
@@ -11295,6 +11315,14 @@
       {
         "date": "2026-09-03",
         "value": 0.81
+      },
+      {
+        "date": "2026-09-04",
+        "value": 0.81
+      },
+      {
+        "date": "2026-09-07",
+        "value": 0.81
       }
     ],
     "be10": [
@@ -13289,12 +13317,16 @@
       {
         "date": "2026-09-04",
         "value": 2.35
+      },
+      {
+        "date": "2026-09-08",
+        "value": 2.37
       }
     ]
   },
   "global": {
     "ecb_rate": {
-      "date": "2026-09-08",
+      "date": "2026-09-09",
       "value": 2.25
     },
     "boe_rate": null,
@@ -13303,21 +13335,21 @@
     "uk_cpi": null
   },
   "cycle": {
-    "growth": -0.174,
-    "inflation": 0.112,
+    "growth": -0.177,
+    "inflation": 0.113,
     "quadrant": "stagflation",
     "confidence": 11
   },
   "cycle_1y_ago": {
-    "growth": -0.063,
-    "inflation": 0.133,
+    "growth": -0.066,
+    "inflation": 0.132,
     "quadrant": "stagflation"
   },
   "cycle_2y_ago": {
-    "growth": -0.215,
-    "inflation": 0.103,
+    "growth": -0.217,
+    "inflation": 0.107,
     "quadrant": "stagflation"
   },
-  "last_updated": "2026-09-08T12:42:54.538485Z",
+  "last_updated": "2026-09-09T12:49:37.778875Z",
   "data_note": "Live data from FRED API and Yahoo Finance. Some metrics (ISM, AAII, Put/Call, NAAIM, margin debt) are pending scraper implementation and fall back to hardcoded demo values."
 }
