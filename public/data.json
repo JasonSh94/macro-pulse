@@ -1,43 +1,43 @@
 {
-  "vix_latest": 15.67,
-  "vix_prev": 15.18,
-  "fear_greed": 36.0,
+  "vix_latest": 14.87,
+  "vix_prev": 15.67,
+  "fear_greed": 35.2,
   "aaii_bull": 32.7,
   "aaii_neutral": 19.2,
   "aaii_bear": 48.1,
   "aaii_spread": -15.4,
-  "put_call_ratio": 1.04,
+  "put_call_ratio": 1.23,
   "equity_flows_4w": null,
   "naaim_exposure": null,
   "money_market_aum_latest": 3.03,
   "money_market_aum_prev": 3.04,
   "margin_debt": null,
-  "yield_2y_latest": 4.85,
-  "yield_10y_latest": 5.11,
-  "yield_30y_latest": 5.4,
-  "yield_2y_prev": 4.71,
-  "yield_10y_prev": 4.96,
-  "yield_curve_spread": 0.26,
-  "real_yield_10y_latest": 2.76,
-  "real_yield_10y_prev": 2.63,
-  "breakeven_10y_latest": 2.33,
-  "breakeven_10y_prev": 2.35,
-  "ig_spread_latest": 0.77,
-  "hy_spread_latest": 2.73,
-  "ig_spread_prev": 0.77,
-  "hy_spread_prev": 2.68,
-  "sp500_latest": 7704.1299,
-  "sp500_chg_pct": -0.02,
-  "dxy_latest": 100.953,
-  "dxy_chg_pct": -0.33,
-  "gold_latest": 4327.7002,
-  "wti_latest": 92.7,
-  "wti_chg_pct": -2.02,
-  "btc_latest": 84156.9609,
-  "btc_chg_pct": -0.26,
+  "yield_2y_latest": 4.87,
+  "yield_10y_latest": 5.18,
+  "yield_30y_latest": 5.47,
+  "yield_2y_prev": 4.85,
+  "yield_10y_prev": 5.11,
+  "yield_curve_spread": 0.31,
+  "real_yield_10y_latest": 2.85,
+  "real_yield_10y_prev": 2.76,
+  "breakeven_10y_latest": 2.34,
+  "breakeven_10y_prev": 2.33,
+  "ig_spread_latest": 0.81,
+  "hy_spread_latest": 2.93,
+  "ig_spread_prev": 0.79,
+  "hy_spread_prev": 2.8,
+  "sp500_latest": 7707.9902,
+  "sp500_chg_pct": -0.46,
+  "dxy_latest": 101.112,
+  "dxy_chg_pct": 0.14,
+  "gold_latest": 4168.7002,
+  "wti_latest": 92.93,
+  "wti_chg_pct": 0.56,
+  "btc_latest": 83926.9375,
+  "btc_chg_pct": -0.63,
   "copper_gold_ratio": 0.0016,
   "sp500_fwd_pe": 24.8,
-  "equity_risk_premium": 1.27,
+  "equity_risk_premium": 1.18,
   "gdp_qoq_latest": 1.5,
   "gdp_qoq_prev": 2.1,
   "core_pce_latest": 3.34,
@@ -1180,18 +1180,6 @@
   },
   "yield_chart": {
     "y2": [
-      {
-        "date": "2024-09-25",
-        "value": 3.53
-      },
-      {
-        "date": "2024-09-26",
-        "value": 3.6
-      },
-      {
-        "date": "2024-09-27",
-        "value": 3.55
-      },
       {
         "date": "2024-09-30",
         "value": 3.66
@@ -3171,21 +3159,13 @@
       {
         "date": "2026-09-23",
         "value": 4.85
+      },
+      {
+        "date": "2026-09-24",
+        "value": 4.87
       }
     ],
     "y10": [
-      {
-        "date": "2024-09-25",
-        "value": 3.79
-      },
-      {
-        "date": "2024-09-26",
-        "value": 3.79
-      },
-      {
-        "date": "2024-09-27",
-        "value": 3.75
-      },
       {
         "date": "2024-09-30",
         "value": 3.81
@@ -5165,21 +5145,13 @@
       {
         "date": "2026-09-23",
         "value": 5.11
+      },
+      {
+        "date": "2026-09-24",
+        "value": 5.18
       }
     ],
     "real10": [
-      {
-        "date": "2024-09-25",
-        "value": 1.61
-      },
-      {
-        "date": "2024-09-26",
-        "value": 1.63
-      },
-      {
-        "date": "2024-09-27",
-        "value": 1.6
-      },
       {
         "date": "2024-09-30",
         "value": 1.63
@@ -7159,21 +7131,13 @@
       {
         "date": "2026-09-23",
         "value": 2.76
+      },
+      {
+        "date": "2026-09-24",
+        "value": 2.85
       }
     ],
     "hy": [
-      {
-        "date": "2024-09-25",
-        "value": 3.19
-      },
-      {
-        "date": "2024-09-26",
-        "value": 3.14
-      },
-      {
-        "date": "2024-09-27",
-        "value": 3.14
-      },
       {
         "date": "2024-09-30",
         "value": 3.03
@@ -9253,21 +9217,17 @@
       {
         "date": "2026-09-23",
         "value": 2.73
+      },
+      {
+        "date": "2026-09-24",
+        "value": 2.8
+      },
+      {
+        "date": "2026-09-25",
+        "value": 2.93
       }
     ],
     "ig": [
-      {
-        "date": "2024-09-25",
-        "value": 0.92
-      },
-      {
-        "date": "2024-09-26",
-        "value": 0.92
-      },
-      {
-        "date": "2024-09-27",
-        "value": 0.92
-      },
       {
         "date": "2024-09-30",
         "value": 0.92
@@ -11343,21 +11303,17 @@
       {
         "date": "2026-09-23",
         "value": 0.77
+      },
+      {
+        "date": "2026-09-24",
+        "value": 0.79
+      },
+      {
+        "date": "2026-09-25",
+        "value": 0.81
       }
     ],
     "be10": [
-      {
-        "date": "2024-09-25",
-        "value": 2.18
-      },
-      {
-        "date": "2024-09-26",
-        "value": 2.16
-      },
-      {
-        "date": "2024-09-27",
-        "value": 2.15
-      },
       {
         "date": "2024-09-30",
         "value": 2.18
@@ -13341,12 +13297,16 @@
       {
         "date": "2026-09-24",
         "value": 2.33
+      },
+      {
+        "date": "2026-09-25",
+        "value": 2.34
       }
     ]
   },
   "global": {
     "ecb_rate": {
-      "date": "2026-09-25",
+      "date": "2026-09-28",
       "value": 2.5
     },
     "boe_rate": null,
@@ -13355,21 +13315,21 @@
     "uk_cpi": null
   },
   "cycle": {
-    "growth": -0.28,
-    "inflation": 0.102,
+    "growth": -0.286,
+    "inflation": 0.103,
     "quadrant": "stagflation",
     "confidence": 11
   },
   "cycle_1y_ago": {
-    "growth": -0.061,
-    "inflation": 0.126,
+    "growth": -0.058,
+    "inflation": 0.124,
     "quadrant": "stagflation"
   },
   "cycle_2y_ago": {
-    "growth": -0.19,
-    "inflation": 0.126,
+    "growth": -0.192,
+    "inflation": 0.124,
     "quadrant": "stagflation"
   },
-  "last_updated": "2026-09-25T13:25:37.544336Z",
+  "last_updated": "2026-09-28T16:36:04.102474Z",
   "data_note": "Live data from FRED API and Yahoo Finance. Some metrics (ISM, AAII, Put/Call, NAAIM, margin debt) are pending scraper implementation and fall back to hardcoded demo values."
 }
