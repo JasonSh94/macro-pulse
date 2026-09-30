@@ -1,47 +1,47 @@
 {
-  "vix_latest": 16.07,
-  "vix_prev": 14.87,
-  "fear_greed": 33.0,
+  "vix_latest": 16.04,
+  "vix_prev": 16.07,
+  "fear_greed": 35.4,
   "aaii_bull": 32.7,
   "aaii_neutral": 19.2,
   "aaii_bear": 48.1,
   "aaii_spread": -15.4,
-  "put_call_ratio": 1.06,
+  "put_call_ratio": 0.88,
   "equity_flows_4w": null,
   "naaim_exposure": null,
   "money_market_aum_latest": 3.03,
   "money_market_aum_prev": 3.04,
   "margin_debt": null,
-  "yield_2y_latest": 4.81,
-  "yield_10y_latest": 5.17,
-  "yield_30y_latest": 5.49,
-  "yield_2y_prev": 4.87,
-  "yield_10y_prev": 5.18,
-  "yield_curve_spread": 0.36,
-  "real_yield_10y_latest": 2.83,
-  "real_yield_10y_prev": 2.85,
-  "breakeven_10y_latest": 2.34,
+  "yield_2y_latest": 4.92,
+  "yield_10y_latest": 5.24,
+  "yield_30y_latest": 5.56,
+  "yield_2y_prev": 4.81,
+  "yield_10y_prev": 5.17,
+  "yield_curve_spread": 0.32,
+  "real_yield_10y_latest": 2.9,
+  "real_yield_10y_prev": 2.83,
+  "breakeven_10y_latest": 2.35,
   "breakeven_10y_prev": 2.34,
-  "ig_spread_latest": 0.83,
-  "hy_spread_latest": 3.02,
-  "ig_spread_prev": 0.81,
-  "hy_spread_prev": 2.93,
-  "sp500_latest": 7681.4399,
-  "sp500_chg_pct": -0.03,
-  "dxy_latest": 101.376,
-  "dxy_chg_pct": 0.17,
-  "gold_latest": 4201.7998,
-  "wti_latest": 91.35,
-  "wti_chg_pct": -1.35,
-  "btc_latest": 83919.6797,
-  "btc_chg_pct": 0.5,
+  "ig_spread_latest": 0.84,
+  "hy_spread_latest": 3.08,
+  "ig_spread_prev": 0.83,
+  "hy_spread_prev": null,
+  "sp500_latest": 7707.4199,
+  "sp500_chg_pct": 0.48,
+  "dxy_latest": 101.254,
+  "dxy_chg_pct": -0.11,
+  "gold_latest": 4202.2998,
+  "wti_latest": 91.25,
+  "wti_chg_pct": 2.09,
+  "btc_latest": 83576.0625,
+  "btc_chg_pct": -0.06,
   "copper_gold_ratio": 0.0016,
-  "sp500_fwd_pe": 24.7,
-  "equity_risk_premium": 1.22,
-  "gdp_qoq_latest": 1.5,
-  "gdp_qoq_prev": 2.1,
-  "core_pce_latest": 3.34,
-  "core_pce_prev": 3.34,
+  "sp500_fwd_pe": 24.8,
+  "equity_risk_premium": 1.13,
+  "gdp_qoq_latest": 2.2,
+  "gdp_qoq_prev": 2.5,
+  "core_pce_latest": 3.01,
+  "core_pce_prev": 2.98,
   "cpi_latest": 3.71,
   "cpi_prev": 3.54,
   "unemployment_latest": 4.1,
@@ -128,91 +128,91 @@
       },
       {
         "date": "2021-01-01",
-        "value": 14319.6
+        "value": 14323.5
       },
       {
         "date": "2021-04-01",
-        "value": 14820.0
+        "value": 14827.8
       },
       {
         "date": "2021-07-01",
-        "value": 14943.3
+        "value": 14950.9
       },
       {
         "date": "2021-10-01",
-        "value": 15086.9
+        "value": 15091.5
       },
       {
         "date": "2022-01-01",
-        "value": 15100.8
+        "value": 15106.1
       },
       {
         "date": "2022-04-01",
-        "value": 15224.4
+        "value": 15230.7
       },
       {
         "date": "2022-07-01",
-        "value": 15295.8
+        "value": 15273.9
       },
       {
         "date": "2022-10-01",
-        "value": 15326.3
+        "value": 15303.3
       },
       {
         "date": "2023-01-01",
-        "value": 15495.8
+        "value": 15468.9
       },
       {
         "date": "2023-04-01",
-        "value": 15553.7
+        "value": 15503.6
       },
       {
         "date": "2023-07-01",
-        "value": 15671.9
+        "value": 15609.1
       },
       {
         "date": "2023-10-01",
-        "value": 15789.7
+        "value": 15731.5
       },
       {
         "date": "2024-01-01",
-        "value": 15857.7
+        "value": 15800.2
       },
       {
         "date": "2024-04-01",
-        "value": 16009.6
+        "value": 15952.6
       },
       {
         "date": "2024-07-01",
-        "value": 16165.8
+        "value": 16098.5
       },
       {
         "date": "2024-10-01",
-        "value": 16320.9
+        "value": 16267.1
       },
       {
         "date": "2025-01-01",
-        "value": 16345.8
+        "value": 16293.3
       },
       {
         "date": "2025-04-01",
-        "value": 16445.7
+        "value": 16378.3
       },
       {
         "date": "2025-07-01",
-        "value": 16585.9
+        "value": 16526.2
       },
       {
         "date": "2025-10-01",
-        "value": 16665.2
+        "value": 16604.6
       },
       {
         "date": "2026-01-01",
-        "value": 16687.7
+        "value": 16634.1
       },
       {
         "date": "2026-04-01",
-        "value": 16829.7
+        "value": 16788.7
       }
     ],
     "investment": [
@@ -286,91 +286,91 @@
       },
       {
         "date": "2021-01-01",
-        "value": 3849.329
+        "value": 3851.692
       },
       {
         "date": "2021-04-01",
-        "value": 3799.029
+        "value": 3801.954
       },
       {
         "date": "2021-07-01",
-        "value": 3937.3
+        "value": 3937.433
       },
       {
         "date": "2021-10-01",
-        "value": 4191.773
+        "value": 4195.596
       },
       {
         "date": "2022-01-01",
-        "value": 4272.382
+        "value": 4259.204
       },
       {
         "date": "2022-04-01",
-        "value": 4176.99
+        "value": 4165.702
       },
       {
         "date": "2022-07-01",
-        "value": 4105.292
+        "value": 4118.275
       },
       {
         "date": "2022-10-01",
-        "value": 4184.98
+        "value": 4195.515
       },
       {
         "date": "2023-01-01",
-        "value": 4108.542
+        "value": 4107.91
       },
       {
         "date": "2023-04-01",
-        "value": 4180.752
+        "value": 4177.427
       },
       {
         "date": "2023-07-01",
-        "value": 4275.527
+        "value": 4276.884
       },
       {
         "date": "2023-10-01",
-        "value": 4313.169
+        "value": 4316.371
       },
       {
         "date": "2024-01-01",
-        "value": 4296.251
+        "value": 4302.695
       },
       {
         "date": "2024-04-01",
-        "value": 4381.983
+        "value": 4389.949
       },
       {
         "date": "2024-07-01",
-        "value": 4392.176
+        "value": 4424.323
       },
       {
         "date": "2024-10-01",
-        "value": 4315.564
+        "value": 4370.273
       },
       {
         "date": "2025-01-01",
-        "value": 4547.947
+        "value": 4607.451
       },
       {
         "date": "2025-04-01",
-        "value": 4382.819
+        "value": 4464.421
       },
       {
         "date": "2025-07-01",
-        "value": 4383.186
+        "value": 4472.599
       },
       {
         "date": "2025-10-01",
-        "value": 4408.299
+        "value": 4484.686
       },
       {
         "date": "2026-01-01",
-        "value": 4492.865
+        "value": 4563.036
       },
       {
         "date": "2026-04-01",
-        "value": 4523.335
+        "value": 4615.141
       }
     ],
     "govt": [
@@ -444,91 +444,91 @@
       },
       {
         "date": "2021-01-01",
-        "value": 4155.388
+        "value": 4164.535
       },
       {
         "date": "2021-04-01",
-        "value": 4174.293
+        "value": 4194.49
       },
       {
         "date": "2021-07-01",
-        "value": 4219.865
+        "value": 4235.581
       },
       {
         "date": "2021-10-01",
-        "value": 4285.062
+        "value": 4299.582
       },
       {
         "date": "2022-01-01",
-        "value": 4336.227
+        "value": 4338.78
       },
       {
         "date": "2022-04-01",
-        "value": 4439.375
+        "value": 4444.324
       },
       {
         "date": "2022-07-01",
-        "value": 4486.473
+        "value": 4488.161
       },
       {
         "date": "2022-10-01",
-        "value": 4570.552
+        "value": 4582.368
       },
       {
         "date": "2023-01-01",
-        "value": 4640.498
+        "value": 4666.312
       },
       {
         "date": "2023-04-01",
-        "value": 4673.36
+        "value": 4717.766
       },
       {
         "date": "2023-07-01",
-        "value": 4789.733
+        "value": 4844.057
       },
       {
         "date": "2023-10-01",
-        "value": 4861.013
+        "value": 4930.82
       },
       {
         "date": "2024-01-01",
-        "value": 4931.777
+        "value": 5018.689
       },
       {
         "date": "2024-04-01",
-        "value": 4995.15
+        "value": 5092.97
       },
       {
         "date": "2024-07-01",
-        "value": 5086.922
+        "value": 5178.896
       },
       {
         "date": "2024-10-01",
-        "value": 5150.725
+        "value": 5244.957
       },
       {
         "date": "2025-01-01",
-        "value": 5195.517
+        "value": 5274.19
       },
       {
         "date": "2025-04-01",
-        "value": 5236.97
+        "value": 5332.951
       },
       {
         "date": "2025-07-01",
-        "value": 5324.402
+        "value": 5404.135
       },
       {
         "date": "2025-10-01",
-        "value": 5343.513
+        "value": 5409.276
       },
       {
         "date": "2026-01-01",
-        "value": 5416.715
+        "value": 5483.833
       },
       {
         "date": "2026-04-01",
-        "value": 5543.809
+        "value": 5626.646
       }
     ],
     "net_exports": [
@@ -602,91 +602,91 @@
       },
       {
         "date": "2021-01-01",
-        "value": -859.721
+        "value": -844.195
       },
       {
         "date": "2021-04-01",
-        "value": -904.257
+        "value": -894.919
       },
       {
         "date": "2021-07-01",
-        "value": -956.876
+        "value": -949.938
       },
       {
         "date": "2021-10-01",
-        "value": -984.631
+        "value": -983.229
       },
       {
         "date": "2022-01-01",
-        "value": -1106.84
+        "value": -1079.876
       },
       {
         "date": "2022-04-01",
-        "value": -1093.044
+        "value": -1074.214
       },
       {
         "date": "2022-07-01",
-        "value": -953.091
+        "value": -941.992
       },
       {
         "date": "2022-10-01",
-        "value": -944.517
+        "value": -939.298
       },
       {
         "date": "2023-01-01",
-        "value": -912.191
+        "value": -883.113
       },
       {
         "date": "2023-04-01",
-        "value": -928.113
+        "value": -910.554
       },
       {
         "date": "2023-07-01",
-        "value": -926.169
+        "value": -920.055
       },
       {
         "date": "2023-10-01",
-        "value": -934.148
+        "value": -927.917
       },
       {
         "date": "2024-01-01",
-        "value": -964.14
+        "value": -936.051
       },
       {
         "date": "2024-04-01",
-        "value": -1032.246
+        "value": -1012.184
       },
       {
         "date": "2024-07-01",
-        "value": -1064.895
+        "value": -1068.748
       },
       {
         "date": "2024-10-01",
-        "value": -1068.994
+        "value": -1080.166
       },
       {
         "date": "2025-01-01",
-        "value": -1380.718
+        "value": -1352.69
       },
       {
         "date": "2025-04-01",
-        "value": -1058.037
+        "value": -1051.72
       },
       {
         "date": "2025-07-01",
-        "value": -955.492
+        "value": -991.47
       },
       {
         "date": "2025-10-01",
-        "value": -968.658
+        "value": -1006.338
       },
       {
         "date": "2026-01-01",
-        "value": -1001.821
+        "value": -1019.471
       },
       {
         "date": "2026-04-01",
-        "value": -1083.712
+        "value": -1099.295
       }
     ]
   },
@@ -3151,6 +3151,10 @@
       {
         "date": "2026-09-25",
         "value": 4.81
+      },
+      {
+        "date": "2026-09-28",
+        "value": 4.92
       }
     ],
     "y10": [
@@ -5141,6 +5145,10 @@
       {
         "date": "2026-09-25",
         "value": 5.17
+      },
+      {
+        "date": "2026-09-28",
+        "value": 5.24
       }
     ],
     "real10": [
@@ -7131,6 +7139,10 @@
       {
         "date": "2026-09-25",
         "value": 2.83
+      },
+      {
+        "date": "2026-09-28",
+        "value": 2.9
       }
     ],
     "hy": [
@@ -9225,6 +9237,10 @@
       {
         "date": "2026-09-28",
         "value": 3.02
+      },
+      {
+        "date": "2026-09-29",
+        "value": 3.08
       }
     ],
     "ig": [
@@ -11315,6 +11331,10 @@
       {
         "date": "2026-09-28",
         "value": 0.83
+      },
+      {
+        "date": "2026-09-29",
+        "value": 0.84
       }
     ],
     "be10": [
@@ -13309,12 +13329,16 @@
       {
         "date": "2026-09-28",
         "value": 2.34
+      },
+      {
+        "date": "2026-09-29",
+        "value": 2.35
       }
     ]
   },
   "global": {
     "ecb_rate": {
-      "date": "2026-09-29",
+      "date": "2026-09-30",
       "value": 2.5
     },
     "boe_rate": null,
@@ -13323,8 +13347,8 @@
     "uk_cpi": null
   },
   "cycle": {
-    "growth": -0.287,
-    "inflation": 0.103,
+    "growth": -0.293,
+    "inflation": 0.071,
     "quadrant": "stagflation",
     "confidence": 11
   },
@@ -13334,10 +13358,10 @@
     "quadrant": "stagflation"
   },
   "cycle_2y_ago": {
-    "growth": -0.192,
+    "growth": -0.19,
     "inflation": 0.124,
     "quadrant": "stagflation"
   },
-  "last_updated": "2026-09-29T14:43:25.107120Z",
+  "last_updated": "2026-09-30T14:46:19.448121Z",
   "data_note": "Live data from FRED API and Yahoo Finance. Some metrics (ISM, AAII, Put/Call, NAAIM, margin debt) are pending scraper implementation and fall back to hardcoded demo values."
 }
